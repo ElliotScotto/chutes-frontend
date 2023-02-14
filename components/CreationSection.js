@@ -1,0 +1,45 @@
+import { useCallback } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+//
+export default function CreationSection({ props }) {
+  const [fontsLoaded] = useFonts({
+    Montserrat_Thin: require("../assets/fonts/montserrat/Montserrat-Thin.ttf"),
+    Montserrat_Light: require("../assets/fonts/montserrat/Montserrat-Light.ttf"),
+    Montserrat_Regular: require("../assets/fonts/montserrat/Montserrat-Regular.ttf"),
+    Montserrat_Medium: require("../assets/fonts/montserrat/Montserrat-Medium.ttf"),
+    Montserrat_SemiBold: require("../assets/fonts/montserrat/Montserrat-SemiBold.ttf"),
+    Montserrat_Bold: require("../assets/fonts/montserrat/Montserrat-Bold.ttf"),
+    Montserrat_BoldItalic: require("../assets/fonts/montserrat/Montserrat-BoldItalic.ttf"),
+  });
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+  return (
+    <View style={styles.customSection} onLayout={onLayoutRootView}>
+      <Text style={styles.fontSection}>{props}</Text>
+    </View>
+  );
+}
+const styles = StyleSheet.create({
+  customSection: {
+    width: "90%",
+    // borderColor: "#568b44",
+    // borderWidth: 2,
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  fontSection: {
+    color: "#566844",
+    textTransform: "uppercase",
+    fontSize: 26,
+    fontFamily: "Montserrat_Light",
+  },
+});
