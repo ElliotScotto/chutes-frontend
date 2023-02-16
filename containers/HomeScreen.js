@@ -19,8 +19,6 @@ import {
 import ArrowSwiper from "../components/ArrowSwiper";
 import ShapeIcon from "../utils/ShapeIcon.js";
 //
-// console.log("Platform ==== >>  ", Platform);
-// console.log("Platform.__constants.Model ==== >>  ", Platform.__constants.Model);
 //
 export default function HomeScreen({ navigation }) {
   const [data, setData] = useState([]);
@@ -28,10 +26,13 @@ export default function HomeScreen({ navigation }) {
     const fetchData = async () => {
       let response;
       try {
+        //Ios
         Platform.OS === "ios" &&
           (response = await axios.get("http://localhost:3000/scraps"));
+        //Simulateur Android
         Platform.__constants.Model === "sdk_gphone64_arm64" &&
           (response = await axios.get("http://10.0.2.2:3000/scraps"));
+        //Mon téléphone
         Platform.__constants.Model === "LYA-L29" &&
           (response = await axios.get("http://192.168.1.38:3000/scraps"));
         setData(response.data);

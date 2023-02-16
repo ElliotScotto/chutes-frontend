@@ -168,10 +168,14 @@ export default function CreateScreen({ navigation }) {
       weight
     ) {
       try {
-        // let response;
-        Platform.OS === "ios"
-          ? setBackendEndpoint("localhost")
-          : setBackendEndpoint("10.0.2.2");
+        //IOS
+        Platform.OS === "ios" && setBackendEndpoint("localhost");
+        //MY ANDROID SIMULATOR
+        Platform.__constants.Model === "sdk_gphone64_arm64" &&
+          setBackendEndpoint("10.0.2.2");
+        //MY PHYSICAL DEVICE HUAWEI
+        Platform.__constants.Model === "LYA-L29" &&
+          setBackendEndpoint("192.168.1.38");
         const response = await axios.post(
           `http://${backendEndpoint}:3000/scrap/create`,
           {
