@@ -71,10 +71,6 @@ export default function ProductScreen({ route }) {
               <Text>{route.params.width}</Text>
             </View>
             <View style={styles.displayDetailsProduct}>
-              <Text style={styles.fontTitle}>Hauteur:</Text>
-              <Text>{route.params.height}</Text>
-            </View>
-            <View style={styles.displayDetailsProduct}>
               <Text style={styles.fontTitle}>Epaisseur:</Text>
               <Text>{route.params.thickness}</Text>
             </View>

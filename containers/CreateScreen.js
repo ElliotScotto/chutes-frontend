@@ -102,27 +102,27 @@ export default function CreateScreen({ navigation }) {
   //length
   const [length, setLength] = useState(0);
   const [mmLength, setMmLength] = useState(false);
-  const [cmLength, setCmLength] = useState(false);
+  const [cmLength, setCmLength] = useState(true);
   const [mLength, setMLength] = useState(false);
   //width
   const [width, setWidth] = useState(0);
   const [mmWidth, setMmWidth] = useState(false);
-  const [cmWidth, setCmWidth] = useState(false);
+  const [cmWidth, setCmWidth] = useState(true);
   const [mWidth, setMWidth] = useState(false);
   //diameter
   const [diameter, setDiameter] = useState(0);
   const [mmDiameter, setMmDiameter] = useState(false);
-  const [cmDiameter, setCmDiameter] = useState(false);
+  const [cmDiameter, setCmDiameter] = useState(true);
   const [mDiameter, setMDiameter] = useState(false);
   //thickness
   const [thickness, setThickness] = useState(0);
-  const [mmThickness, setMmThickness] = useState(false);
+  const [mmThickness, setMmThickness] = useState(true);
   const [cmThickness, setCmThickness] = useState(false);
   const [mThickness, setMThickness] = useState(false);
   //depth
   const [depth, setDepth] = useState(0);
   const [mmDepth, setMmDepth] = useState(false);
-  const [cmDepth, setCmDepth] = useState(false);
+  const [cmDepth, setCmDepth] = useState(true);
   const [mDepth, setMDepth] = useState(false);
   //Shapes
   const [shape, setShape] = useState([]);
@@ -751,7 +751,7 @@ export default function CreateScreen({ navigation }) {
                           style={styles.checkbox5}
                           value={mmLength}
                           onValueChange={() => {
-                            setMmLength(!mmLength);
+                            setMmLength(true);
                             setCmLength(false);
                             setMLength(false);
                           }}
@@ -767,7 +767,7 @@ export default function CreateScreen({ navigation }) {
                           value={cmLength}
                           onValueChange={() => {
                             setMmLength(false);
-                            setCmLength(!cmLength);
+                            setCmLength(true);
                             setMLength(false);
                           }}
                           color={cmLength ? "#568b44" : "#fff"}
@@ -781,7 +781,7 @@ export default function CreateScreen({ navigation }) {
                           style={styles.checkbox5}
                           value={mLength}
                           onValueChange={() => {
-                            setMLength(!mLength);
+                            setMLength(true);
                             setMmLength(false);
                             setCmLength(false);
                           }}
@@ -816,7 +816,7 @@ export default function CreateScreen({ navigation }) {
                           style={styles.checkbox5}
                           value={mmWidth}
                           onValueChange={() => {
-                            setMmWidth(!mmWidth);
+                            setMmWidth(true);
                             setCmWidth(false);
                             setMWidth(false);
                           }}
@@ -832,7 +832,7 @@ export default function CreateScreen({ navigation }) {
                           value={cmWidth}
                           onValueChange={() => {
                             setMmWidth(false);
-                            setCmWidth(!cmWidth);
+                            setCmWidth(true);
                             setMWidth(false);
                           }}
                           color={cmWidth ? "#568b44" : "#fff"}
@@ -846,7 +846,7 @@ export default function CreateScreen({ navigation }) {
                           style={styles.checkbox5}
                           value={mWidth}
                           onValueChange={() => {
-                            setMWidth(!mWidth);
+                            setMWidth(true);
                             setMmWidth(false);
                             setCmWidth(false);
                           }}
@@ -888,7 +888,7 @@ export default function CreateScreen({ navigation }) {
                           style={styles.checkbox5}
                           value={mmThickness}
                           onValueChange={() => {
-                            setMmThickness(!mmThickness);
+                            setMmThickness(true);
                             setCmThickness(false);
                             setMThickness(false);
                           }}
@@ -904,7 +904,7 @@ export default function CreateScreen({ navigation }) {
                           value={cmThickness}
                           onValueChange={() => {
                             setMmThickness(false);
-                            setCmThickness(!cmThickness);
+                            setCmThickness(true);
                             setMThickness(false);
                           }}
                           color={cmThickness ? "#568b44" : "#fff"}
@@ -918,7 +918,7 @@ export default function CreateScreen({ navigation }) {
                           style={styles.checkbox5}
                           value={mThickness}
                           onValueChange={() => {
-                            setMThickness(!mThickness);
+                            setMThickness(true);
                             setMmThickness(false);
                             setCmThickness(false);
                           }}
@@ -953,7 +953,7 @@ export default function CreateScreen({ navigation }) {
                           style={styles.checkbox5}
                           value={mmDiameter}
                           onValueChange={() => {
-                            setMmDiameter(!mmDiameter);
+                            setMmDiameter(true);
                             setCmDiameter(false);
                             setMDiameter(false);
                           }}
@@ -969,7 +969,7 @@ export default function CreateScreen({ navigation }) {
                           value={cmDiameter}
                           onValueChange={() => {
                             setMmDiameter(false);
-                            setCmDiameter(!cmDiameter);
+                            setCmDiameter(true);
                             setMDiameter(false);
                           }}
                           color={cmDiameter ? "#568b44" : "#fff"}
@@ -983,7 +983,7 @@ export default function CreateScreen({ navigation }) {
                           style={styles.checkbox5}
                           value={mDiameter}
                           onValueChange={() => {
-                            setMDiameter(!mDiameter);
+                            setMDiameter(true);
                             setMmDiameter(false);
                             setCmDiameter(false);
                           }}
@@ -1018,7 +1018,7 @@ export default function CreateScreen({ navigation }) {
                           style={styles.checkbox5}
                           value={mmDepth}
                           onValueChange={() => {
-                            setMmDepth(!mmDepth);
+                            setMmDepth(true);
                             setCmDepth(false);
                             setMDepth(false);
                           }}
@@ -1034,7 +1034,7 @@ export default function CreateScreen({ navigation }) {
                           value={cmDepth}
                           onValueChange={() => {
                             setMmDepth(false);
-                            setCmDepth(!cmDepth);
+                            setCmDepth(true);
                             setMDepth(false);
                           }}
                           color={cmDepth ? "#568b44" : "#fff"}
@@ -1048,7 +1048,7 @@ export default function CreateScreen({ navigation }) {
                           style={styles.checkbox5}
                           value={mDepth}
                           onValueChange={() => {
-                            setMDepth(!mDepth);
+                            setMDepth(true);
                             setMmDepth(false);
                             setCmDepth(false);
                           }}

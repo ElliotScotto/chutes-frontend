@@ -18,34 +18,49 @@ import {
 //Components
 import ArrowSwiper from "../components/ArrowSwiper";
 import ShapeIcon from "../utils/ShapeIcon.js";
+import SearchBar from "../components/SearchBar";
 //
 //
 export default function HomeScreen({ navigation }) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
+  const [searchName, setSearchName] = useState("");
+  // const [searchCondition, setSearchCondition] = useState("");
+  // const [searchDescription, setSearchDescription] = useState("");
+  // const [filter, setFilter] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       let response;
       try {
         //Ios
         Platform.OS === "ios" &&
-          (response = await axios.get("http://localhost:3000/scraps"));
+          (response = await axios.get(
+            `http://localhost:3000/scraps?name=${searchName}`
+          ));
         //Simulateur Android
         Platform.__constants.Model === "sdk_gphone64_arm64" &&
-          (response = await axios.get("http://10.0.2.2:3000/scraps"));
+          (response = await axios.get(
+            `http://10.0.2.2:3000/scraps?name=${searchName}`
+          ));
         //Mon téléphone
         Platform.__constants.Model === "LYA-L29" &&
-          (response = await axios.get("http://192.168.1.38:3000/scraps"));
+          (response = await axios.get(
+            `http://192.168.1.38:3000/scraps?name=${searchName}`
+          ));
         setData(response.data);
-        // console.log("HOMESCREEN : RESPONSE.DATA ====> ", response.data);
+        console.log("HOMESCREEN : RESPONSE.DATA ====> ", response.data);
       } catch (res) {
         console.warn("ERREUR REQUETE ====> ", res);
       }
     };
     fetchData();
-  }, []);
+  }, [searchName]);
+  //
+  //
   return (
     <SafeAreaProvider>
       <StatusBar hidden={false} style="light" />
+      <SearchBar searchName={searchName} setSearchName={setSearchName} />
       <SafeAreaView style={styles.container}>
         <FlatList
           data={data}
@@ -84,7 +99,7 @@ export default function HomeScreen({ navigation }) {
                         //DIMENSIONS
                         length: item.length,
                         width: item.width,
-                        height: item.height,
+
                         thickness: item.thickness,
                         diameter: item.diameter,
                         depth: item.depth,
@@ -282,45 +297,6 @@ export default function HomeScreen({ navigation }) {
                         </View>
                       ) : (
                         <Text style={styles.fontSecondCard}>Largeur : ?</Text>
-                      )}
-                      {item.height ? (
-                        <View style={{ flexDirection: "row" }}>
-                          <Text style={styles.fontSecondCard}>
-                            Hauteur : {item.height}
-                          </Text>
-                          {item.mmHeight && (
-                            <Text
-                              style={[
-                                styles.fontSecondCard,
-                                styles.dimensionsUnit,
-                              ]}
-                            >
-                              mm
-                            </Text>
-                          )}
-                          {item.cmHeight && (
-                            <Text
-                              style={[
-                                styles.fontSecondCard,
-                                styles.dimensionsUnit,
-                              ]}
-                            >
-                              cm
-                            </Text>
-                          )}
-                          {item.mHeight && (
-                            <Text
-                              style={[
-                                styles.fontSecondCard,
-                                styles.dimensionsUnit,
-                              ]}
-                            >
-                              M
-                            </Text>
-                          )}
-                        </View>
-                      ) : (
-                        <Text style={styles.fontSecondCard}>Hauteur : ?</Text>
                       )}
                     </View>
                     <View>

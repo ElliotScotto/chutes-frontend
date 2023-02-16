@@ -26,6 +26,8 @@ import CreationSection from "../components/CreationSection";
 import ModalPicture from "../modals/CreatePictures";
 //
 export default function UploadScreen() {
+  //Connexion
+  const [backendEndpoint, setBackendEndpoint] = useState("");
   //Pictures
   const [data, setData] = useState();
   const [picture, setPicture] = useState(null);
@@ -120,7 +122,7 @@ export default function UploadScreen() {
     console.log("tab ====> ", tab);
     console.log("tab.length ====> ", tab.length);
     console.log("LastElement : tab[tab.length-1] ====> ", tab[tab.length - 1]);
-    console.log("result.assets[0].uri", result.assets[0].uri);
+    // console.log("result.assets[0].uri", result.assets[0].uri);
     const formData = new FormData();
     formData.append("picture", {
       uri: selectedPicture,
@@ -129,35 +131,27 @@ export default function UploadScreen() {
     });
 
     try {
-      let response;
-      {
-        Platform.OS = "ios"
-          ? (response = await axios.post(
-              "http://localhost:3000/scrap/upload",
-              formData,
-              {
-                headers: {
-                  "content-type": "multipart/form-data",
-                },
-                //Si vous avez des headers à transmettre c'est par ici !
-                //headers: { Authorization: "Bearer " + userToken },
-                //transformRequest: (formData) => formData,
-              }
-            ))
-          : (response = await axios.post(
-              "https://10.0.2.2:3000/scrap/upload",
-              formData,
-              {
-                headers: {
-                  "content-type": "multipart/form-data",
-                },
-                //Si vous avez des headers à transmettre c'est par ici !
-                //headers: { Authorization: "Bearer " + userToken },
-                transformRequest: (formData) => formData,
-              }
-            ));
-      }
+      //IOS
+      Platform.OS === "ios" && setBackendEndpoint("localhost");
+      //MY ANDROID SIMULATOR
+      Platform.__constants.Model === "sdk_gphone64_arm64" &&
+        setBackendEndpoint("10.0.2.2");
+      //MY PHYSICAL DEVICE HUAWEI
+      Platform.__constants.Model === "LYA-L29" &&
+        setBackendEndpoint("192.168.1.38");
 
+      const response = await axios.post(
+        `https://${backendEndpoint}:3000/scrap/upload`,
+        formData,
+        {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+          //Si vous avez des headers à transmettre c'est par ici !
+          //headers: { Authorization: "Bearer " + userToken },
+          transformRequest: (formData) => formData,
+        }
+      );
       if (response.data) {
         setData(response.data);
         setIsLoadingPicture(false);
