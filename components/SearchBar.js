@@ -2,11 +2,7 @@ import { StyleSheet, Text, View, TextInput, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../utils/colors";
 //
-export default function SearchBar({
-  setSearchName,
-  //   setSearchCondition,
-  //   setSearchDescription,
-}) {
+export default function SearchBar({ setSearchName }) {
   return (
     <View style={styles.mainSearchView}>
       <View style={styles.barSearch}>
@@ -17,13 +13,10 @@ export default function SearchBar({
         </View>
         <View style={styles.inputSearch}>
           <TextInput
-            placeholder="Rechercher par nom, catégorie, matière..."
+            placeholder="Rechercher par nom"
             autoCapitalize="none"
-            // value={searchText}
             onChangeText={(event) => {
               setSearchName(event);
-              //   setSearchCondition(event);
-              //   setSearchDescription(event);
             }}
           />
         </View>

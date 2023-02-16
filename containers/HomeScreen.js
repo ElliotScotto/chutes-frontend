@@ -19,6 +19,8 @@ import {
 import ArrowSwiper from "../components/ArrowSwiper";
 import ShapeIcon from "../utils/ShapeIcon.js";
 import SearchBar from "../components/SearchBar";
+//Utils
+import displayDate from "../utils/displayDate";
 //
 //
 export default function HomeScreen({ navigation }) {
@@ -26,7 +28,6 @@ export default function HomeScreen({ navigation }) {
   const [searchName, setSearchName] = useState("");
   // const [searchCondition, setSearchCondition] = useState("");
   // const [searchDescription, setSearchDescription] = useState("");
-  // const [filter, setFilter] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,7 +61,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaProvider>
       <StatusBar hidden={false} style="light" />
-      <SearchBar searchName={searchName} setSearchName={setSearchName} />
+      <SearchBar setSearchName={setSearchName} />
       <SafeAreaView style={styles.container}>
         <FlatList
           data={data}
@@ -470,7 +471,7 @@ export default function HomeScreen({ navigation }) {
                         <Text style={styles.lightBlack}>Norme / label : ?</Text>
                       )}
                       <Text style={styles.lightBlack}>
-                        Création : {item.createdAt}
+                        Création : {displayDate(item.createdAt)}
                       </Text>
                     </View>
                     <View style={styles.thirdCardRight}>
