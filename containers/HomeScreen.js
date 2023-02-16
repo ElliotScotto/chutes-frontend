@@ -19,15 +19,21 @@ import {
 import ArrowSwiper from "../components/ArrowSwiper";
 import ShapeIcon from "../utils/ShapeIcon.js";
 //
+// console.log("Platform ==== >>  ", Platform);
+// console.log("Platform.__constants.Model ==== >>  ", Platform.__constants.Model);
+//
 export default function HomeScreen({ navigation }) {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       let response;
       try {
-        Platform.OS === "ios"
-          ? (response = await axios.get("http://localhost:3000/scraps"))
-          : (response = await axios.get("http://10.0.2.2:3000/scraps"));
+        Platform.OS === "ios" &&
+          (response = await axios.get("http://localhost:3000/scraps"));
+        Platform.__constants.Model === "sdk_gphone64_arm64" &&
+          (response = await axios.get("http://10.0.2.2:3000/scraps"));
+        Platform.__constants.Model === "LYA-L29" &&
+          (response = await axios.get("http://192.168.1.38:3000/scraps"));
         setData(response.data);
         // console.log("HOMESCREEN : RESPONSE.DATA ====> ", response.data);
       } catch (res) {
@@ -39,15 +45,12 @@ export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaProvider>
       <StatusBar hidden={false} style="light" />
-      <SafeAreaView
-        style={[styles.container, Platform.OS === "ios" && styles.IosContainer]}
-      >
+      <SafeAreaView style={styles.container}>
         <FlatList
           data={data}
           renderItem={({ item, index }) => {
             const arrayCategories = item.category;
             const arrayShapes = item.shape;
-            console.log("arrayShapes ====> ", arrayShapes);
             return (
               <Swiper
                 style={styles.wrapper}
@@ -574,7 +577,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: widthScreen,
   },
-  // IosContainer: { height: heightScreen },
+
   mainDisplayCardScrap: {
     width: widthScreen * 0.95,
     marginLeft: 10,
