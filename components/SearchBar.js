@@ -1,8 +1,25 @@
-import { StyleSheet, Text, View, TextInput, Dimensions } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Dimensions,
+  Pressable,
+} from "react-native";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+//Utils
 import colors from "../utils/colors";
+//Components
+import Filters from "./Filters";
+import { useState } from "react";
 //
-export default function SearchBar({ setSearchName }) {
+//
+export default function SearchBar({
+  setSearchName,
+  filtersVisible,
+  setFiltersVisible,
+  setSort,
+}) {
   return (
     <View style={styles.mainSearchView}>
       <View style={styles.barSearch}>
@@ -17,10 +34,31 @@ export default function SearchBar({ setSearchName }) {
             autoCapitalize="none"
             onChangeText={(event) => {
               setSearchName(event);
+              setSort(event);
             }}
           />
         </View>
       </View>
+      <Pressable
+        style={styles.displayFilters}
+        onPress={() => {
+          setFiltersVisible(!filtersVisible);
+        }}
+      >
+        {!filtersVisible ? (
+          <MaterialCommunityIcons
+            name="filter"
+            size={24}
+            color={colors.scrapFirstColor}
+          />
+        ) : (
+          <MaterialCommunityIcons
+            name="filter-outline"
+            size={24}
+            color={colors.scrapFirstColor}
+          />
+        )}
+      </Pressable>
     </View>
   );
 }
@@ -33,6 +71,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.scrapFirstColor,
     alignItems: "center",
     justifyContent: "center",
+    position: "relative",
+  },
+  displayFilters: {
+    alignItems: "center",
+    position: "absolute",
+    // top: 18, //hauteur de la searchbar(60/2=30 >> hauteur icone=24 donc 30-12 )
+    right: widthScreen * 0.05,
   },
   barSearch: {
     backgroundColor: "white",
@@ -43,6 +88,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
   },
+
   iconSearch: {
     height: 40,
     width: "10%",

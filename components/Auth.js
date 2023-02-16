@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 //Icons
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";

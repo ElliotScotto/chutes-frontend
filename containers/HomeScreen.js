@@ -20,6 +20,7 @@ import ArrowSwiper from "../components/ArrowSwiper";
 import ShapeIcon from "../utils/ShapeIcon.js";
 import SearchBar from "../components/SearchBar";
 import Loading from "../components/Loading";
+import Filters from "../components/Filters";
 //Utils
 import displayDate from "../utils/displayDate";
 //
@@ -28,6 +29,8 @@ export default function HomeScreen({ navigation }) {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [searchName, setSearchName] = useState("");
+  const [filtersVisible, setFiltersVisible] = useState(false);
+  const [sort, setSort] = useState("");
   // const [searchCondition, setSearchCondition] = useState("");
   // const [searchDescription, setSearchDescription] = useState("");
 
@@ -38,7 +41,7 @@ export default function HomeScreen({ navigation }) {
         //Ios
         Platform.OS === "ios" &&
           (response = await axios.get(
-            `http://localhost:3000/scraps?name=${searchName}`
+            `http://localhost:3000/scraps?sort=${sort}&name=${searchName}`
           ));
         //Simulateur Android
         Platform.__constants.Model === "sdk_gphone64_arm64" &&
@@ -58,13 +61,20 @@ export default function HomeScreen({ navigation }) {
       }
     };
     fetchData();
-  }, [searchName]);
+  }, [searchName, sort]);
   //
   //
   return (
     <SafeAreaProvider>
       <StatusBar hidden={false} style="light" />
-      <SearchBar setSearchName={setSearchName} />
+      <SearchBar
+        setSearchName={setSearchName}
+        filtersVisible={filtersVisible}
+        setFiltersVisible={setFiltersVisible}
+        setSort={setSort}
+      />
+      {filtersVisible && <Filters />}
+
       <SafeAreaView style={styles.container}>
         {isLoading ? (
           <Loading />
@@ -562,7 +572,7 @@ export default function HomeScreen({ navigation }) {
     </SafeAreaProvider>
   );
 }
-const heightScreen = Dimensions.get("window").height;
+// const heightScreen = Dimensions.get("window").height;
 const widthScreen = Dimensions.get("window").width;
 const styles = StyleSheet.create({
   container: {
