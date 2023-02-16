@@ -47,6 +47,8 @@ import ModalPicture from "../modals/CreatePictures";
 //
 //
 export default function CreateScreen({ navigation }) {
+  //Connexion
+  const [backendEndpoint, setBackendEndpoint] = useState("");
   //product
   const [name, setName] = useState("");
   //Condition
@@ -58,7 +60,6 @@ export default function CreateScreen({ navigation }) {
   const [ruined, setRuined] = useState(false);
   //
   const [description, setDescription] = useState("");
-
   //Offer
   const [quantity, setQuantity] = useState(null);
   const [price, setPrice] = useState(0);
@@ -167,48 +168,64 @@ export default function CreateScreen({ navigation }) {
       weight
     ) {
       try {
-        let response;
+        // let response;
         Platform.OS === "ios"
-          ? (response = await axios.post(`http://localhost:3000/scrap/create`, {
-              name,
-              material,
-              condition,
-              description,
-              length,
-              width,
-              shape,
-              category,
-              quantity,
-              price,
-              isFree,
-              isForSell,
-              weight,
-              necessaryTool,
-              homePickup,
-              sending,
-              userCity,
-              // pictures: selectedPicture,
-            }))
-          : (response = await axios.post(`http://10.0.2.2:3000/scrap/create`, {
-              name,
-              material,
-              condition,
-              description,
-              length,
-              width,
-              shape,
-              category,
-              quantity,
-              price,
-              isFree,
-              isForSell,
-              weight,
-              necessaryTool,
-              homePickup,
-              sending,
-              userCity,
-              // pictures: selectedPicture,
-            }));
+          ? setBackendEndpoint("localhost")
+          : setBackendEndpoint("10.0.2.2");
+        const response = await axios.post(
+          `http://${backendEndpoint}:3000/scrap/create`,
+          {
+            //PRODUCT
+            name,
+            material,
+            condition,
+            description,
+            category,
+            weight,
+            //DIMENSIONS
+            //length
+            length,
+            mmLength,
+            cmLength,
+            mLength,
+            //width
+            width,
+            mmWidth,
+            cmWidth,
+            mWidth,
+            //thickness
+            thickness,
+            mmThickness,
+            cmThickness,
+            mThickness,
+            //diameter
+            diameter,
+            mmDiameter,
+            cmDiameter,
+            mDiameter,
+            //depth
+            depth,
+            mmDepth,
+            cmDepth,
+            mDepth,
+            //shape
+            shape,
+            //OFFER
+            quantity,
+            price,
+            isFree,
+            isForSell,
+            //details
+            necessaryTool,
+            brand,
+            normAndLabel,
+            //DELIVERY
+            homePickup,
+            sending,
+            userCity,
+            // pictures: selectedPicture,
+          }
+        );
         console.log("CREATESCREEN: response.data ===== >", response.data);
       } catch (error) {
         console.log("CREATESCREEN: error.response=====> ", error.response);
@@ -2042,7 +2059,7 @@ export default function CreateScreen({ navigation }) {
             </View>
           )}
           <View style={styles.displayBtnCreate}>
-            {name.length < 40 &&
+            {name.length < 30 &&
             material.length > 0 &&
             condition &&
             description.length >= 10 &&

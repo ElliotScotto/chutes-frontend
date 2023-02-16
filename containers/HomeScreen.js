@@ -69,27 +69,54 @@ export default function HomeScreen({ navigation }) {
                     key={index}
                     onPress={() => {
                       navigation.navigate("Product", {
-                        id: item._id,
+                        //PRODUCT
                         name: item.name,
                         condition: item.condition,
                         description: item.description,
                         category: item.category,
-                        createdAt: item.createdAt,
-                        diameter: item.diameter,
-                        thickness: item.thickness,
+                        material: item.material,
+                        pictures: item.pictures,
+                        weight: item.weight,
+                        //DIMENSIONS
                         length: item.length,
                         width: item.width,
                         height: item.height,
-                        homePickup: item.homePickup,
-                        sending: item.sending,
-                        material: item.material,
+                        thickness: item.thickness,
+                        diameter: item.diameter,
+                        depth: item.depth,
+                        //unitMeasure
+                        mmLength: item.mmLength,
+                        cmLength: item.cmLength,
+                        mLength: item.mLength,
+                        mmWidth: item.mmWidth,
+                        cmWidth: item.cmWidth,
+                        mWidth: item.mWidth,
+                        mmThickness: item.mmThickness,
+                        cmThickness: item.cmThickness,
+                        mThickness: item.mThickness,
+                        mmDiameter: item.mmDiameter,
+                        cmDiameter: item.cmDiameter,
+                        mDiameter: item.mDiameter,
+                        mmDepth: item.mmDepth,
+                        cmDepth: item.cmDepth,
+                        mDepth: item.mDepth,
+                        //shape
                         shape: item.shape,
-                        pictures: item.pictures,
+                        //details
+                        normAndLabel: item.normAndLabel,
+                        brand: item.brand,
+                        //offer
+                        isFree: item.isFree,
+                        isForSell: item.isForSell,
                         quantity: item.quantity,
                         price: item.price,
-                        weight: item.weight,
-                        normAndLabel: item.normAndLabel,
+                        //delivery
+                        homePickup: item.homePickup,
+                        sending: item.sending,
+                        //offerID
+                        id: item._id,
                         owner: item.owner,
+                        createdAt: item.createdAt,
                       });
                     }}
                   >
@@ -175,50 +202,238 @@ export default function HomeScreen({ navigation }) {
                   <View style={styles.displayDimensions}>
                     <View>
                       {item.length ? (
-                        <Text style={styles.fontSecondCard}>
-                          Longueur : {item.length}
-                        </Text>
+                        <View style={{ flexDirection: "row" }}>
+                          <Text style={styles.fontSecondCard}>
+                            Longueur : {item.length}
+                          </Text>
+                          {item.mmLength && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              mm
+                            </Text>
+                          )}
+                          {item.cmLength && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              cm
+                            </Text>
+                          )}
+                          {item.mLength && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              M
+                            </Text>
+                          )}
+                        </View>
                       ) : (
                         <Text style={styles.fontSecondCard}>Longueur : ?</Text>
                       )}
-
                       {item.width ? (
-                        <Text style={styles.fontSecondCard}>
-                          Largeur : {item.width}
-                        </Text>
+                        <View style={{ flexDirection: "row" }}>
+                          <Text style={styles.fontSecondCard}>
+                            Largeur : {item.width}
+                          </Text>
+                          {item.mmWidth && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              mm
+                            </Text>
+                          )}
+                          {item.cmWidth && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              cm
+                            </Text>
+                          )}
+                          {item.mWidth && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              M
+                            </Text>
+                          )}
+                        </View>
                       ) : (
                         <Text style={styles.fontSecondCard}>Largeur : ?</Text>
                       )}
-
                       {item.height ? (
-                        <Text style={styles.fontSecondCard}>
-                          Hauteur : {item.height}
-                        </Text>
+                        <View style={{ flexDirection: "row" }}>
+                          <Text style={styles.fontSecondCard}>
+                            Hauteur : {item.height}
+                          </Text>
+                          {item.mmHeight && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              mm
+                            </Text>
+                          )}
+                          {item.cmHeight && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              cm
+                            </Text>
+                          )}
+                          {item.mHeight && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              M
+                            </Text>
+                          )}
+                        </View>
                       ) : (
                         <Text style={styles.fontSecondCard}>Hauteur : ?</Text>
                       )}
                     </View>
                     <View>
                       {item.diameter ? (
-                        <Text style={styles.fontSecondCard}>
-                          Diamètre : {item.diameter}
-                        </Text>
+                        <View style={{ flexDirection: "row" }}>
+                          <Text style={styles.fontSecondCard}>
+                            Diamètre : {item.diameter}
+                          </Text>
+                          {item.mmDiameter && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              mm
+                            </Text>
+                          )}
+                          {item.cmDiameter && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              cm
+                            </Text>
+                          )}
+                          {item.mDiameter && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              M
+                            </Text>
+                          )}
+                        </View>
                       ) : (
                         <Text style={styles.fontSecondCard}>Diamètre : ?</Text>
                       )}
-
                       {item.thickness ? (
-                        <Text style={styles.fontSecondCard}>
-                          Epaisseur : {item.thickness}
-                        </Text>
+                        <View style={{ flexDirection: "row" }}>
+                          <Text style={styles.fontSecondCard}>
+                            Epaisseur : {item.thickness}
+                          </Text>
+                          {item.mmThickness && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              mm
+                            </Text>
+                          )}
+                          {item.cmThickness && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              cm
+                            </Text>
+                          )}
+                          {item.mThickness && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              M
+                            </Text>
+                          )}
+                        </View>
                       ) : (
                         <Text style={styles.fontSecondCard}>Epaisseur : ?</Text>
                       )}
-
                       {item.depth ? (
-                        <Text style={styles.fontSecondCard}>
-                          Profondeur : {item.depth}
-                        </Text>
+                        <View style={{ flexDirection: "row" }}>
+                          <Text style={styles.fontSecondCard}>
+                            Profondeur : {item.depth}
+                          </Text>
+                          {item.mmDepth && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              mm
+                            </Text>
+                          )}
+                          {item.cmDepth && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              cm
+                            </Text>
+                          )}
+                          {item.mDepth && (
+                            <Text
+                              style={[
+                                styles.fontSecondCard,
+                                styles.dimensionsUnit,
+                              ]}
+                            >
+                              M
+                            </Text>
+                          )}
+                        </View>
                       ) : (
                         <Text style={styles.fontSecondCard}>
                           Profondeur : ?
@@ -284,27 +499,55 @@ export default function HomeScreen({ navigation }) {
                         key={index}
                         onPress={() => {
                           navigation.navigate("Product", {
-                            id: item._id,
+                            //PRODUCT
                             name: item.name,
                             condition: item.condition,
                             description: item.description,
                             category: item.category,
-                            createdAt: item.createdAt,
-                            diameter: item.diameter,
-                            thickness: item.thickness,
+                            material: item.material,
+                            pictures: item.pictures,
+                            weight: item.weight,
+                            //DIMENSIONS
                             length: item.length,
                             width: item.width,
                             height: item.height,
-                            homePickup: item.homePickup,
-                            sending: item.sending,
-                            material: item.material,
+                            thickness: item.thickness,
+                            diameter: item.diameter,
+                            depth: item.depth,
+                            //unitMeasure
+                            mmLength: item.mmLength,
+                            cmLength: item.cmLength,
+                            mLength: item.mLength,
+                            mmWidth: item.mmWidth,
+                            cmWidth: item.cmWidth,
+                            mWidth: item.mWidth,
+                            mmThickness: item.mmThickness,
+                            cmThickness: item.cmThickness,
+                            mThickness: item.mThickness,
+                            mmDiameter: item.mmDiameter,
+                            cmDiameter: item.cmDiameter,
+                            mDiameter: item.mDiameter,
+                            mmDepth: item.mmDepth,
+                            cmDepth: item.cmDepth,
+                            mDepth: item.mDepth,
+                            //shape
                             shape: item.shape,
-                            pictures: item.pictures,
+                            //details
+                            necessaryTool: item.necessaryTool,
+                            normAndLabel: item.normAndLabel,
+                            brand: item.brand,
+                            //offer
+                            isFree: item.isFree,
+                            isForSell: item.isForSell,
                             quantity: item.quantity,
                             price: item.price,
-                            weight: item.weight,
-                            normAndLabel: item.normAndLabel,
+                            //delivery
+                            homePickup: item.homePickup,
+                            sending: item.sending,
+                            //offerID
+                            id: item._id,
                             owner: item.owner,
+                            createdAt: item.createdAt,
                           });
                         }}
                       >
@@ -416,6 +659,7 @@ const styles = StyleSheet.create({
     // borderColor: "black",
     // borderWidth: 1,
   },
+  dimensionsUnit: { marginLeft: 3 },
   displayShapes: {
     flexDirection: "row",
     // borderColor: "black",

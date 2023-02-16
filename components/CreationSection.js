@@ -33,13 +33,13 @@ const styles = StyleSheet.create({
     width: "90%",
     // borderColor: "#568b44",
     // borderWidth: 2,
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 10,
+    marginBottom: 10,
   },
   fontSection: {
     color: "#566844",
     textTransform: "uppercase",
-    fontSize: 26,
+    fontSize: 20,
     fontFamily: "Montserrat_Light",
   },
 });
