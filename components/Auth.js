@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import { Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import Constants from "expo-constants";
 //Icons
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 //Navigation
@@ -16,15 +18,37 @@ import CreateScreen from "../containers/CreateScreen";
 import UploadScreen from "../containers/UploadScreen";
 import ProfileScreen from "../containers/ProfileScreen";
 import WelcomeScreen from "../containers/WelcomeScreen";
+//Components
+import SearchBar from "./SearchBar";
+import Logo from "./Logo";
+//Utils
+import colors from "../utils/colors";
+//Header
+Platform.OS === "ios"
+  ? console.log(
+      "Constants.statusBarHeight_IOS ===== >> ",
+      Constants.statusBarHeight
+    )
+  : console.log(
+      "Constants.statusBarHeight_ANDROID ===== >> ",
+      Constants.statusBarHeight
+    );
 
-const HomeScreen2 = () => {
+const DisplayTabs = () => {
+  const [searchName, setSearchName] = useState("");
+  const [filtersVisible, setFiltersVisible] = useState(false);
+  const [sort, setSort] = useState("");
   return (
     <>
-      <StatusBar hidden={false} style="auto" />
+      <StatusBar
+        hidden={false}
+        style="auto"
+        backgroundColor={colors.scrapSecondColor}
+      />
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
-          tabBarActiveTintColor: "#568b44",
+          tabBarActiveTintColor: colors.scrapFirstColor,
           tabBarInactiveTintColor: "gray",
           headerBackTitleVisible: false,
           tabBarShowLabel: false,
@@ -37,10 +61,15 @@ const HomeScreen2 = () => {
             tabBarIcon: ({ color, size }) => (
               <AntDesign name={"search1"} size={size} color={color} />
             ),
-            title: "CHUTES",
+            headerTitle: () => <Logo />,
             headerShown: true,
+            headerTitleAlign: "center",
+            headerTitleContainerStyle: { justifyContent: "flex-end" },
             headerTintColor: "#fff",
-            headerStyle: { backgroundColor: "#568b44" },
+            headerStyle: {
+              height: Constants.statusBarHeight + 30, // 30 correspond à la hauteur du composant <Logo/>
+              backgroundColor: colors.scrapFirstColor,
+            },
           }}
         />
         <Tab.Screen
@@ -74,7 +103,7 @@ const Auth = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen name="Home2" component={HomeScreen2} />
+        <Stack.Screen name="Tabs" component={DisplayTabs} />
         <Stack.Screen
           name="Product"
           component={ProductScreen}
@@ -95,6 +124,7 @@ const Auth = () => {
           component={UploadScreen}
           options={(options) => {
             // console.log("options.route", options.route);
+            <SearchBar />;
             return {
               title: null,
               headerShown: true,
@@ -102,7 +132,7 @@ const Auth = () => {
               headerBackTitleVisible: true,
               headerBackTitle: "Caractéristiques", // ou Back = options.route.params.screen,
               headerTintColor: "#fff",
-              headerStyle: { backgroundColor: "#568b44" },
+              headerStyle: { backgroundColor: "#568b44", height: 20 },
             };
           }}
         />

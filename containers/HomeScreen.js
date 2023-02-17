@@ -1,6 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
+//StatusBar & Header
 import { StatusBar } from "expo-status-bar";
+import Constants from "expo-constants";
+//Icons
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import axios from "axios";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -14,6 +17,7 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
+  ScrollView,
 } from "react-native";
 //Components
 import ArrowSwiper from "../components/ArrowSwiper";
@@ -23,6 +27,7 @@ import Loading from "../components/Loading";
 import Filters from "../components/Filters";
 //Utils
 import displayDate from "../utils/displayDate";
+import colors from "../utils/colors";
 //
 //
 export default function HomeScreen({ navigation }) {
@@ -65,7 +70,11 @@ export default function HomeScreen({ navigation }) {
   //
   //
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider
+      style={
+        Platform.OS === "ios" ? styles.scrollViewIOS : styles.scrollViewAndroid
+      }
+    >
       <StatusBar hidden={false} style="light" />
       <SearchBar
         setSearchName={setSearchName}
@@ -74,7 +83,6 @@ export default function HomeScreen({ navigation }) {
         setSort={setSort}
       />
       {filtersVisible && <Filters />}
-
       <SafeAreaView style={styles.container}>
         {isLoading ? (
           <Loading />
@@ -572,9 +580,16 @@ export default function HomeScreen({ navigation }) {
     </SafeAreaProvider>
   );
 }
-// const heightScreen = Dimensions.get("window").height;
+const heightScreen = Dimensions.get("window").height;
 const widthScreen = Dimensions.get("window").width;
 const styles = StyleSheet.create({
+  scrollViewAndroid: {
+    paddingBottom: Constants.statusBarHeight + 32, //On ajoute la hauteur occupée par le header et la SearchBar
+  },
+  scrollViewIOS: {
+    paddingBottom: Constants.statusBarHeight + 8, //On ajoute la hauteur occupée par le header et la SearchBar
+    backgroundColor: "#fff",
+  },
   container: {
     backgroundColor: "#fff",
     alignItems: "center",

@@ -43,7 +43,7 @@ export default function WelcomeScreen({ navigation }) {
               <TouchableOpacity
                 style={styles.btnHome}
                 onPress={() => {
-                  navigation.navigate("Home2");
+                  navigation.navigate("Tabs");
                 }}
               >
                 <Text style={styles.btnFontHome}>Demarrer</Text>

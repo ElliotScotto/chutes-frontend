@@ -38,27 +38,27 @@ export default function SearchBar({
             }}
           />
         </View>
+        <Pressable
+          style={styles.displayFilters}
+          onPress={() => {
+            setFiltersVisible(!filtersVisible);
+          }}
+        >
+          {!filtersVisible ? (
+            <MaterialCommunityIcons
+              name="filter"
+              size={24}
+              color={colors.scrapFirstColor}
+            />
+          ) : (
+            <MaterialCommunityIcons
+              name="filter-outline"
+              size={24}
+              color={colors.scrapFirstColor}
+            />
+          )}
+        </Pressable>
       </View>
-      <Pressable
-        style={styles.displayFilters}
-        onPress={() => {
-          setFiltersVisible(!filtersVisible);
-        }}
-      >
-        {!filtersVisible ? (
-          <MaterialCommunityIcons
-            name="filter"
-            size={24}
-            color={colors.scrapFirstColor}
-          />
-        ) : (
-          <MaterialCommunityIcons
-            name="filter-outline"
-            size={24}
-            color={colors.scrapFirstColor}
-          />
-        )}
-      </Pressable>
     </View>
   );
 }
@@ -67,43 +67,40 @@ export default function SearchBar({
 const widthScreen = Dimensions.get("window").width;
 const styles = StyleSheet.create({
   mainSearchView: {
-    height: 60,
     backgroundColor: colors.scrapFirstColor,
     alignItems: "center",
     justifyContent: "center",
-    position: "relative",
+  },
+
+  barSearch: {
+    width: widthScreen * 0.95,
+    marginBottom: 10,
+    backgroundColor: "white",
+    flexDirection: "row",
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
+    borderBottomLeftRadius: 3,
+    borderBottomRightRadius: 3,
   },
   displayFilters: {
     alignItems: "center",
-    position: "absolute",
-    // top: 18, //hauteur de la searchbar(60/2=30 >> hauteur icone=24 donc 30-12 )
-    right: widthScreen * 0.05,
+    justifyContent: "center",
+    right: widthScreen * 0.08,
   },
-  barSearch: {
-    backgroundColor: "white",
-    flexDirection: "row",
-    width: widthScreen * 0.95,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
-  },
-
   iconSearch: {
     height: 40,
     width: "10%",
     alignItems: "center",
     justifyContent: "center",
-
-    borderTopLeftRadius: 7,
-    borderBottomLeftRadius: 7,
+    borderTopLeftRadius: 3,
+    borderBottomLeftRadius: 3,
   },
   inputSearch: {
     height: 40,
     justifyContent: "center",
     backgroundColor: "white",
     width: "90%",
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
+    borderTopRightRadius: 3,
+    borderBottomRightRadius: 3,
   },
 });
