@@ -28,6 +28,7 @@ import Filters from "../components/Filters";
 //Utils
 import displayDate from "../utils/displayDate";
 import colors from "../utils/colors";
+import { globalWhite } from "../utils/globalWhite";
 //
 //
 export default function HomeScreen({ navigation }) {
@@ -71,18 +72,23 @@ export default function HomeScreen({ navigation }) {
   //
   return (
     <SafeAreaProvider
-      style={
-        Platform.OS === "ios" ? styles.scrollViewIOS : styles.scrollViewAndroid
-      }
+      style={[
+        globalWhite.container,
+        Platform.OS === "ios" ? styles.scrollViewIOS : styles.scrollViewAndroid,
+      ]}
     >
-      <StatusBar hidden={false} style="light" />
+      <StatusBar hidden={false} style="dark" />
       <SearchBar
         setSearchName={setSearchName}
         filtersVisible={filtersVisible}
         setFiltersVisible={setFiltersVisible}
         setSort={setSort}
       />
-      {filtersVisible && <Filters />}
+      {filtersVisible && (
+        <View style={{ alignItems: "center" }}>
+          <Filters sort={sort} setSort={setSort} />
+        </View>
+      )}
       <SafeAreaView style={styles.container}>
         {isLoading ? (
           <Loading />
@@ -588,10 +594,8 @@ const styles = StyleSheet.create({
   },
   scrollViewIOS: {
     paddingBottom: Constants.statusBarHeight + 8, //On ajoute la hauteur occupée par le header et la SearchBar
-    backgroundColor: "#fff",
   },
   container: {
-    backgroundColor: "#fff",
     alignItems: "center",
     width: widthScreen,
   },
@@ -608,9 +612,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     borderRadius: 3,
-    // marginBottom: 15,
-    // borderColor: "black",
-    // borderWidth: 1,
   },
 
   CardScrapLeft: {

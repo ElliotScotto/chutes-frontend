@@ -40,11 +40,7 @@ const DisplayTabs = () => {
   const [sort, setSort] = useState("");
   return (
     <>
-      <StatusBar
-        hidden={false}
-        style="auto"
-        backgroundColor={colors.scrapSecondColor}
-      />
+      <StatusBar hidden={false} />
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
@@ -65,10 +61,10 @@ const DisplayTabs = () => {
             headerShown: true,
             headerTitleAlign: "center",
             headerTitleContainerStyle: { justifyContent: "flex-end" },
-            headerTintColor: "#fff",
+
             headerStyle: {
               height: Constants.statusBarHeight + 30, // 30 correspond à la hauteur du composant <Logo/>
-              backgroundColor: colors.scrapFirstColor,
+              backgroundColor: "#fff",
             },
           }}
         />

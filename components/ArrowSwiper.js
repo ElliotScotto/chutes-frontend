@@ -2,23 +2,31 @@ import React from "react";
 import { useState } from "react";
 import { View, StyleSheet, Dimensions, Text, Platform } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+//Utils
+import colors from "../utils/colors";
+//
 let arrowDisplay;
-
+//
 export default function ArrowSwiper({ title }) {
   let arrowStyle = "";
 
   {
-    title === "Dimensions" ? (arrowStyle = "#566844") : (arrowStyle = "#fff");
+    title === "Dimensions" ? (arrowStyle = "black") : (arrowStyle = "#fff");
   }
   return (
-    <View style={[styles.mainContainer, { borderBottomColor: arrowStyle }]}>
-      <Text style={{ color: arrowStyle, fontWeight: "500" }}>{title}</Text>
+    <View
+      style={[
+        styles.mainContainer,
+        { borderBottomColor: colors.scrapFirstColor },
+      ]}
+    >
+      <Text style={{ color: arrowStyle }}>{title}</Text>
 
       <MaterialCommunityIcons
         style={styles.arrow}
         name="arrow-right"
         size={18}
-        color={arrowStyle}
+        color={colors.scrapFirstColor}
       />
     </View>
   );

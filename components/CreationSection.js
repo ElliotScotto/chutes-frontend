@@ -2,6 +2,8 @@ import { useCallback } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+//Utils
+import colors from "../utils/colors";
 //
 export default function CreationSection({ props }) {
   const [fontsLoaded] = useFonts({
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   fontSection: {
-    color: "#566844",
+    color: colors.scrapSecondColor,
     textTransform: "uppercase",
     fontSize: 20,
     fontFamily: "Montserrat_Light",

@@ -6,12 +6,13 @@ import {
   Dimensions,
   Pressable,
 } from "react-native";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 //Utils
 import colors from "../utils/colors";
 //Components
 import Filters from "./Filters";
 import { useState } from "react";
+import GreenHider from "./GreenHider.js";
 //
 //
 export default function SearchBar({
@@ -25,7 +26,11 @@ export default function SearchBar({
       <View style={styles.barSearch}>
         <View style={styles.iconSearch}>
           <Text>
-            <Ionicons name="ios-compass-outline" size={24} color="grey" />
+            <AntDesign
+              name={"search1"}
+              size={20}
+              color={colors.scrapFirstColor}
+            />
           </Text>
         </View>
         <View style={styles.inputSearch}>
@@ -67,15 +72,18 @@ export default function SearchBar({
 const widthScreen = Dimensions.get("window").width;
 const styles = StyleSheet.create({
   mainSearchView: {
-    backgroundColor: colors.scrapFirstColor,
+    // backgroundColor: colors.scrapFirstColor,
     alignItems: "center",
     justifyContent: "center",
   },
 
   barSearch: {
-    width: widthScreen * 0.95,
-    marginBottom: 10,
+    width: widthScreen * 0.97,
+    // marginTop: 3,
+    // marginBottom: 5,
     backgroundColor: "white",
+    borderColor: colors.scrapFirstColor,
+    borderWidth: 1,
     flexDirection: "row",
     borderTopLeftRadius: 3,
     borderTopRightRadius: 3,
@@ -92,8 +100,8 @@ const styles = StyleSheet.create({
     width: "10%",
     alignItems: "center",
     justifyContent: "center",
-    borderTopLeftRadius: 3,
-    borderBottomLeftRadius: 3,
+    // borderTopLeftRadius: 3,
+    // borderBottomLeftRadius: 3,
   },
   inputSearch: {
     height: 40,
