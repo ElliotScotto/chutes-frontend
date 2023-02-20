@@ -75,6 +75,8 @@ const styles = StyleSheet.create({
     // backgroundColor: colors.scrapFirstColor,
     alignItems: "center",
     justifyContent: "center",
+    // borderColor: "black",
+    // borderWidth: 1,
   },
 
   barSearch: {

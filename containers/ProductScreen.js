@@ -11,6 +11,7 @@ import {
 } from "react-native";
 //Utils
 import displayDate from "../utils/displayDate";
+import { globalWhite } from "../utils/globalWhite";
 //Components
 import CreationSection from "../components/CreationSection";
 //
@@ -20,7 +21,7 @@ export default function ProductScreen({ route }) {
   const arrayShape = route.params.shape;
   const DateOffer = route.params.createdAt;
   return (
-    <ScrollView>
+    <ScrollView style={globalWhite.container}>
       <SafeAreaProvider>
         <SafeAreaView style={styles.container}>
           <View style={styles.productContainer}>

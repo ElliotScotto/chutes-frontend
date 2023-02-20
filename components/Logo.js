@@ -62,9 +62,11 @@ export default function Logo() {
 const widthScreen = Dimensions.get("window").width;
 const styles = StyleSheet.create({
   displayLogo: {
-    height: 30,
+    height: 40,
     justifyContent: "flex-end",
     position: "relative",
+    // borderColor: "black",
+    // borderWidth: 1,
   },
   fontTitleHeader: {
     fontSize: 18,

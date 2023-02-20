@@ -63,7 +63,7 @@ const DisplayTabs = () => {
             headerTitleContainerStyle: { justifyContent: "flex-end" },
 
             headerStyle: {
-              height: Constants.statusBarHeight + 30, // 30 correspond à la hauteur du composant <Logo/>
+              height: Constants.statusBarHeight + 40, // 40 correspond à la hauteur du composant <Logo/>
               backgroundColor: "#fff",
             },
           }}

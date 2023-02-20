@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { StyleSheet, View, Text, Dimensions } from "react-native";
+import { StyleSheet, View, Text, Dimensions, LogBox } from "react-native";
 //Packages
 import Checkbox from "expo-checkbox";
 //Utils
 import colors from "../utils/colors";
 //
-export default function Filters({ sort, setSort }) {
+export default function Filters({ searchCondition, setSearchCondition }) {
   //Condition
-  const [condition, setShape] = useState([]);
+  // const [condition, setCondition] = useState([]);
   let arrayCondition = [];
   const [perfect, setPerfect] = useState(false);
   const [good, setGood] = useState(false);
@@ -16,17 +16,24 @@ export default function Filters({ sort, setSort }) {
   const [ruined, setRuined] = useState(false);
   //
   //Condition
-  const handleAddCondition = (props) => {
-    if (condition.indexOf(props) === -1) {
-      condition.push(props);
+  const handleAddCondition2 = (props) => {
+    if (searchCondition.indexOf(props) === -1) {
+      searchCondition.push(props);
       arrayCondition.push(props);
     }
-    console.log("handleAddCondition: condition ====> ", condition);
+
+    console.log("handleAddCondition2: searchCondition ====> ", searchCondition);
+    console.log("handleAddCondition2: arrayCondition ====> ", arrayCondition);
   };
   //
-  const handleDeleteCondition = (props) => {
-    arrayCondition = condition.splice(condition.indexOf(props), 1);
-    console.log("handleDeleteCondition: condition ====> ", condition);
+  const handleDeleteCondition2 = (props) => {
+    // arrayCondition = arrayCondition.splice(props, 1);
+    arrayCondition = searchCondition.splice(searchCondition.indexOf(props), 1);
+    console.log(
+      "handleDeleteCondition2: searchCondition ====> ",
+      searchCondition
+    );
+    console.log("handleDeleteCondition2: arrayCondition", arrayCondition);
   };
   //
   return (
@@ -41,9 +48,9 @@ export default function Filters({ sort, setSort }) {
             <>
               {setPerfect(!perfect)}
               {!perfect
-                ? handleAddCondition("Comme neuf")
-                : condition.indexOf("Comme neuf") !== -1 &&
-                  handleDeleteCondition("Comme neuf")}
+                ? handleAddCondition2("Comme neuf")
+                : searchCondition.indexOf("Comme neuf") !== -1 &&
+                  handleDeleteCondition2("Comme neuf")}
             </>;
           }}
           color={perfect ? "#568b44" : "#fff"}
@@ -61,9 +68,9 @@ export default function Filters({ sort, setSort }) {
             <>
               {setGood(!good)}
               {!good
-                ? handleAddCondition("Très bon état")
-                : condition.indexOf("Très bon état") !== -1 &&
-                  handleDeleteCondition("Très bon état")}
+                ? handleAddCondition2("Très bon état")
+                : searchCondition.indexOf("Très bon état") !== -1 &&
+                  handleDeleteCondition2("Très bon état")}
             </>;
           }}
           color={good ? "#568b44" : "#fff"}
@@ -81,9 +88,9 @@ export default function Filters({ sort, setSort }) {
             <>
               {setAcceptable(!acceptable)}
               {!acceptable
-                ? handleAddCondition("Correct")
-                : condition.indexOf("Correct") !== -1 &&
-                  handleDeleteCondition("Correct")}
+                ? handleAddCondition2("Correct")
+                : searchCondition.indexOf("Correct") !== -1 &&
+                  handleDeleteCondition2("Correct")}
             </>;
           }}
           color={acceptable ? "#568b44" : "#fff"}
@@ -101,9 +108,9 @@ export default function Filters({ sort, setSort }) {
             <>
               {setDamaged(!damaged)}
               {!damaged
-                ? handleAddCondition("Abîmé")
-                : condition.indexOf("Abîmé") !== -1 &&
-                  handleDeleteCondition("Abîmé")}
+                ? handleAddCondition2("Abîmé")
+                : searchCondition.indexOf("Abîmé") !== -1 &&
+                  handleDeleteCondition2("Abîmé")}
             </>;
           }}
           color={damaged ? "#568b44" : "#fff"}
@@ -121,9 +128,9 @@ export default function Filters({ sort, setSort }) {
             <>
               {setRuined(!ruined)}
               {!ruined
-                ? handleAddCondition("Très abîmé")
-                : condition.indexOf("Très abîmé") !== -1 &&
-                  handleDeleteCondition("Très abîmé")}
+                ? handleAddCondition2("Très abîmé")
+                : searchCondition.indexOf("Très abîmé") !== -1 &&
+                  handleDeleteCondition2("Très abîmé")}
             </>;
           }}
           color={ruined ? "#568b44" : "#fff"}
@@ -133,7 +140,7 @@ export default function Filters({ sort, setSort }) {
           <Text style={styles.fontFilters}>Très abîmé</Text>
         </View>
       </View>
-      {console.log("Filters : condition ==== > ", condition)}
+      {/* {console.log("Filters : searchCondition ==== > ", searchCondition)} */}
     </View>
   );
 }
@@ -150,7 +157,7 @@ const styles = StyleSheet.create({
   fontFilters: { color: "#fff" },
   //Condition
   inputBox: {
-    marginBottom: 5,
+    padding: 5,
     flexDirection: "row",
     alignItems: "center",
   },

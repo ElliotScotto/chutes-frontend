@@ -37,7 +37,7 @@ export default function HomeScreen({ navigation }) {
   const [searchName, setSearchName] = useState("");
   const [filtersVisible, setFiltersVisible] = useState(false);
   const [sort, setSort] = useState("");
-  // const [searchCondition, setSearchCondition] = useState("");
+  const [searchCondition, setSearchCondition] = useState([]);
   // const [searchDescription, setSearchDescription] = useState("");
 
   useEffect(() => {
@@ -47,17 +47,17 @@ export default function HomeScreen({ navigation }) {
         //Ios
         Platform.OS === "ios" &&
           (response = await axios.get(
-            `http://localhost:3000/scraps?sort=${sort}&name=${searchName}`
+            `http://localhost:3000/scraps?searchCondition=${searchCondition}&name=${searchName}`
           ));
         //Simulateur Android
         Platform.__constants.Model === "sdk_gphone64_arm64" &&
           (response = await axios.get(
-            `http://10.0.2.2:3000/scraps?name=${searchName}`
+            `http://10.0.2.2:3000/scraps?searchCondition=${searchCondition}&name=${searchName}`
           ));
         //Mon téléphone
         Platform.__constants.Model === "LYA-L29" &&
           (response = await axios.get(
-            `http://192.168.1.38:3000/scraps?name=${searchName}`
+            `http://192.168.1.38:3000/scraps?searchCondition=${searchCondition}&name=${searchName}`
           ));
         setIsLoading(false);
         setData(response.data);
@@ -67,7 +67,7 @@ export default function HomeScreen({ navigation }) {
       }
     };
     fetchData();
-  }, [searchName, sort]);
+  }, [searchName, searchCondition]);
   //
   //
   return (
@@ -86,7 +86,10 @@ export default function HomeScreen({ navigation }) {
       />
       {filtersVisible && (
         <View style={{ alignItems: "center" }}>
-          <Filters sort={sort} setSort={setSort} />
+          <Filters
+            searchCondition={searchCondition}
+            setSearchCondition={setSearchCondition}
+          />
         </View>
       )}
       <SafeAreaView style={styles.container}>
@@ -130,7 +133,6 @@ export default function HomeScreen({ navigation }) {
                           //DIMENSIONS
                           length: item.length,
                           width: item.width,
-
                           thickness: item.thickness,
                           diameter: item.diameter,
                           depth: item.depth,
@@ -220,7 +222,7 @@ export default function HomeScreen({ navigation }) {
                         </View>
                       </View>
                       <View style={styles.CardScrapRight}>
-                        {!item.pictures[0] ? (
+                        {/* {!item.pictures[0] ? (
                           <MaterialCommunityIcons
                             name="image-off-outline"
                             resizeMode="cover"
@@ -233,7 +235,7 @@ export default function HomeScreen({ navigation }) {
                             style={styles.mainPictureScrap}
                             source={{ uri: `${item.pictures[0]}` }}
                           />
-                        )}
+                        )} */}
                       </View>
                     </TouchableOpacity>
                     <ArrowSwiper title={"Dimensions"} />
@@ -508,9 +510,9 @@ export default function HomeScreen({ navigation }) {
                             Norme / label : ?
                           </Text>
                         )}
-                        <Text style={styles.lightBlack}>
+                        {/* <Text style={styles.lightBlack}>
                           Création : {displayDate(item.createdAt)}
-                        </Text>
+                        </Text> */}
                       </View>
                       <View style={styles.thirdCardRight}>
                         <TouchableOpacity
@@ -598,6 +600,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     width: widthScreen,
+    marginTop: 10,
   },
 
   mainDisplayCardScrap: {
