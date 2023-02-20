@@ -32,43 +32,56 @@ import { globalWhite } from "../utils/globalWhite";
 //
 //
 export default function HomeScreen({ navigation }) {
-  const [data, setData] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchName, setSearchName] = useState("");
-  const [filtersVisible, setFiltersVisible] = useState(false);
-  const [sort, setSort] = useState("");
-  const [searchCondition, setSearchCondition] = useState([]);
-  // const [searchDescription, setSearchDescription] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      let response;
-      try {
-        //Ios
-        Platform.OS === "ios" &&
-          (response = await axios.get(
-            `http://localhost:3000/scraps?searchCondition=${searchCondition}&name=${searchName}`
-          ));
-        //Simulateur Android
-        Platform.__constants.Model === "sdk_gphone64_arm64" &&
-          (response = await axios.get(
-            `http://10.0.2.2:3000/scraps?searchCondition=${searchCondition}&name=${searchName}`
-          ));
-        //Mon téléphone
-        Platform.__constants.Model === "LYA-L29" &&
-          (response = await axios.get(
-            `http://192.168.1.38:3000/scraps?searchCondition=${searchCondition}&name=${searchName}`
-          ));
-        setIsLoading(false);
-        setData(response.data);
-        console.log("HOMESCREEN : RESPONSE.DATA ====> ", response.data);
-      } catch (res) {
-        console.warn("ERREUR REQUETE ====> ", res);
-      }
-    };
-    fetchData();
-  }, [searchName, searchCondition]);
+  //Connexion
+  const [backendEndpoint, setBackendEndpoint] = useState("");
   //
+  const [products, setProducts] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [filtersVisible, setFiltersVisible] = useState(false);
+  //
+
+  const [filter, setFilter] = useState({
+    perfect: false,
+    good: false,
+    acceptable: false,
+    damaged: false,
+    ruined: false,
+    search: "",
+  });
+  //
+  const handleSearch = (text) => {
+    setFilter({ ...filter, search: text });
+  };
+  const handleFilter = (name, value) => {
+    setFilter({ ...filter, [name]: value });
+  };
+
+  const getProducts = async () => {
+    // //IOS
+    // Platform.OS === "ios" && setBackendEndpoint("localhost");
+    // //MY ANDROID SIMULATOR
+    // Platform.__constants.Model === "sdk_gphone64_arm64" &&
+    //   setBackendEndpoint("10.0.2.2");
+    // //MY PHYSICAL DEVICE HUAWEI
+    // Platform.__constants.Model === "LYA-L29" &&
+    //   setBackendEndpoint("192.168.1.38");
+    //
+    try {
+      const res = await fetch(
+        `http://localhost:3000/scraps?filter=${JSON.stringify(filter)}`
+      );
+      const data = await res.json();
+      setProducts(data);
+      setIsLoading(false);
+      // console.log("products === >", products);
+    } catch (error) {
+      console.log("HOMECREEN: error.response=====> ", error.response);
+    }
+  };
+  //
+  useEffect(() => {
+    getProducts();
+  }, [filter]);
   //
   return (
     <SafeAreaProvider
@@ -79,17 +92,14 @@ export default function HomeScreen({ navigation }) {
     >
       <StatusBar hidden={false} style="dark" />
       <SearchBar
-        setSearchName={setSearchName}
         filtersVisible={filtersVisible}
         setFiltersVisible={setFiltersVisible}
-        setSort={setSort}
+        handleSearch={handleSearch}
+        filter={filter}
       />
       {filtersVisible && (
         <View style={{ alignItems: "center" }}>
-          <Filters
-            searchCondition={searchCondition}
-            setSearchCondition={setSearchCondition}
-          />
+          <Filters filter={filter} handleFilter={handleFilter} />
         </View>
       )}
       <SafeAreaView style={styles.container}>
@@ -97,7 +107,7 @@ export default function HomeScreen({ navigation }) {
           <Loading />
         ) : (
           <FlatList
-            data={data}
+            data={products}
             renderItem={({ item, index }) => {
               const arrayCategories = item.category;
               const arrayShapes = item.shape;

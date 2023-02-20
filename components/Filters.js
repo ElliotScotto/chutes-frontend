@@ -1,57 +1,36 @@
-import { useState } from "react";
-import { StyleSheet, View, Text, Dimensions, LogBox } from "react-native";
+import { useState, useEffect } from "react";
+import { StyleSheet, View, Text, Dimensions, Platform } from "react-native";
 //Packages
 import Checkbox from "expo-checkbox";
+import axios from "axios";
 //Utils
 import colors from "../utils/colors";
 //
-export default function Filters({ searchCondition, setSearchCondition }) {
+
+//
+export default function Filters({ filter, handleFilter }) {
   //Condition
   // const [condition, setCondition] = useState([]);
-  let arrayCondition = [];
+
   const [perfect, setPerfect] = useState(false);
   const [good, setGood] = useState(false);
   const [acceptable, setAcceptable] = useState(false);
   const [damaged, setDamaged] = useState(false);
   const [ruined, setRuined] = useState(false);
   //
-  //Condition
-  const handleAddCondition2 = (props) => {
-    if (searchCondition.indexOf(props) === -1) {
-      searchCondition.push(props);
-      arrayCondition.push(props);
-    }
-
-    console.log("handleAddCondition2: searchCondition ====> ", searchCondition);
-    console.log("handleAddCondition2: arrayCondition ====> ", arrayCondition);
-  };
-  //
-  const handleDeleteCondition2 = (props) => {
-    // arrayCondition = arrayCondition.splice(props, 1);
-    arrayCondition = searchCondition.splice(searchCondition.indexOf(props), 1);
-    console.log(
-      "handleDeleteCondition2: searchCondition ====> ",
-      searchCondition
-    );
-    console.log("handleDeleteCondition2: arrayCondition", arrayCondition);
-  };
   //
   return (
     <View style={styles.mainContainerFilters}>
-      {/* <Text style={styles.fontFilters}>Filtres</Text> */}
+      <Text style={[styles.fontFilters, styles.titlteFilter]}>état</Text>
       {/* Condition */}
       <View style={styles.inputBox}>
         <Checkbox
           style={styles.checkbox3}
-          value={perfect}
-          onValueChange={() => {
-            <>
-              {setPerfect(!perfect)}
-              {!perfect
-                ? handleAddCondition2("Comme neuf")
-                : searchCondition.indexOf("Comme neuf") !== -1 &&
-                  handleDeleteCondition2("Comme neuf")}
-            </>;
+          value={filter.perfect}
+          onValueChange={(value) => {
+            {
+              handleFilter("perfect", value);
+            }
           }}
           color={perfect ? "#568b44" : "#fff"}
         />
@@ -63,15 +42,11 @@ export default function Filters({ searchCondition, setSearchCondition }) {
       <View style={styles.inputBox}>
         <Checkbox
           style={styles.checkbox3}
-          value={good}
-          onValueChange={() => {
-            <>
-              {setGood(!good)}
-              {!good
-                ? handleAddCondition2("Très bon état")
-                : searchCondition.indexOf("Très bon état") !== -1 &&
-                  handleDeleteCondition2("Très bon état")}
-            </>;
+          value={filter.good}
+          onValueChange={(value) => {
+            {
+              handleFilter("good", value);
+            }
           }}
           color={good ? "#568b44" : "#fff"}
         />
@@ -83,15 +58,11 @@ export default function Filters({ searchCondition, setSearchCondition }) {
       <View style={styles.inputBox}>
         <Checkbox
           style={styles.checkbox3}
-          value={acceptable}
-          onValueChange={() => {
-            <>
-              {setAcceptable(!acceptable)}
-              {!acceptable
-                ? handleAddCondition2("Correct")
-                : searchCondition.indexOf("Correct") !== -1 &&
-                  handleDeleteCondition2("Correct")}
-            </>;
+          value={filter.acceptable}
+          onValueChange={(value) => {
+            {
+              handleFilter("acceptable", value);
+            }
           }}
           color={acceptable ? "#568b44" : "#fff"}
         />
@@ -103,15 +74,11 @@ export default function Filters({ searchCondition, setSearchCondition }) {
       <View style={styles.inputBox}>
         <Checkbox
           style={styles.checkbox3}
-          value={damaged}
-          onValueChange={() => {
-            <>
-              {setDamaged(!damaged)}
-              {!damaged
-                ? handleAddCondition2("Abîmé")
-                : searchCondition.indexOf("Abîmé") !== -1 &&
-                  handleDeleteCondition2("Abîmé")}
-            </>;
+          value={filter.damaged}
+          onValueChange={(value) => {
+            {
+              handleFilter("damaged", value);
+            }
           }}
           color={damaged ? "#568b44" : "#fff"}
         />
@@ -123,15 +90,11 @@ export default function Filters({ searchCondition, setSearchCondition }) {
       <View style={styles.inputBox}>
         <Checkbox
           style={styles.checkbox3}
-          value={ruined}
-          onValueChange={() => {
-            <>
-              {setRuined(!ruined)}
-              {!ruined
-                ? handleAddCondition2("Très abîmé")
-                : searchCondition.indexOf("Très abîmé") !== -1 &&
-                  handleDeleteCondition2("Très abîmé")}
-            </>;
+          value={filter.ruined}
+          onValueChange={(value) => {
+            {
+              handleFilter("ruined", value);
+            }
           }}
           color={ruined ? "#568b44" : "#fff"}
         />
@@ -154,7 +117,15 @@ const styles = StyleSheet.create({
     // alignItems: "center",
     // justifyContent: "center",
   },
-  fontFilters: { color: "#fff" },
+  titlteFilter: {
+    textTransform: "uppercase",
+    fontWeight: "bold",
+    marginLeft: 5,
+    letterSpacing: 1,
+  },
+  fontFilters: {
+    color: "#fff",
+  },
   //Condition
   inputBox: {
     padding: 5,

@@ -16,10 +16,10 @@ import GreenHider from "./GreenHider.js";
 //
 //
 export default function SearchBar({
-  setSearchName,
   filtersVisible,
   setFiltersVisible,
-  setSort,
+  handleSearch,
+  filter,
 }) {
   return (
     <View style={styles.mainSearchView}>
@@ -37,10 +37,8 @@ export default function SearchBar({
           <TextInput
             placeholder="Rechercher par nom"
             autoCapitalize="none"
-            onChangeText={(event) => {
-              setSearchName(event);
-              setSort(event);
-            }}
+            onChangeText={handleSearch}
+            value={filter.search}
           />
         </View>
         <Pressable
