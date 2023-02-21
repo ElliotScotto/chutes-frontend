@@ -38,8 +38,8 @@ export default function HomeScreen({ navigation }) {
   const [products, setProducts] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [filtersVisible, setFiltersVisible] = useState(false);
+  const [sortPrice, setSortPrice] = useState(false);
   //
-
   const [filter, setFilter] = useState({
     perfect: false,
     good: false,
@@ -47,6 +47,9 @@ export default function HomeScreen({ navigation }) {
     damaged: false,
     ruined: false,
     search: "",
+    freePrice: false,
+    isAsc: false,
+    isDesc: false,
   });
   //
   const handleSearch = (text) => {
@@ -68,7 +71,9 @@ export default function HomeScreen({ navigation }) {
     //
     try {
       const res = await fetch(
-        `http://localhost:3000/scraps?filter=${JSON.stringify(filter)}`
+        `http://localhost:3000/scraps?filter=${JSON.stringify(filter)}&sort=${
+          sortPrice ? "price-asc" : "price-desc"
+        }`
       );
       const data = await res.json();
       setProducts(data);
@@ -81,7 +86,7 @@ export default function HomeScreen({ navigation }) {
   //
   useEffect(() => {
     getProducts();
-  }, [filter]);
+  }, [filter, sortPrice]);
   //
   return (
     <SafeAreaProvider
@@ -99,7 +104,12 @@ export default function HomeScreen({ navigation }) {
       />
       {filtersVisible && (
         <View style={{ alignItems: "center" }}>
-          <Filters filter={filter} handleFilter={handleFilter} />
+          <Filters
+            filter={filter}
+            handleFilter={handleFilter}
+            sortPrice={sortPrice}
+            setSortPrice={setSortPrice}
+          />
         </View>
       )}
       <SafeAreaView style={styles.container}>
@@ -232,7 +242,7 @@ export default function HomeScreen({ navigation }) {
                         </View>
                       </View>
                       <View style={styles.CardScrapRight}>
-                        {/* {!item.pictures[0] ? (
+                        {!item.pictures[0] ? (
                           <MaterialCommunityIcons
                             name="image-off-outline"
                             resizeMode="cover"
@@ -245,7 +255,7 @@ export default function HomeScreen({ navigation }) {
                             style={styles.mainPictureScrap}
                             source={{ uri: `${item.pictures[0]}` }}
                           />
-                        )} */}
+                        )}
                       </View>
                     </TouchableOpacity>
                     <ArrowSwiper title={"Dimensions"} />
