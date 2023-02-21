@@ -23,15 +23,7 @@ export default function Filters({
   const [freePrice, setFreePrice] = useState(false);
   const [isAsc, setIsAsc] = useState(false);
   const [isDesc, setIsDesc] = useState(false);
-  //Prix
-  // const handleAscChange = () => {
-  //   setSortDirection("price_asc");
-  // };
 
-  // const handleDescChange = () => {
-  //   setSortDirection("price_desc");
-  // };
-  //
   return (
     <View style={styles.mainContainerFilters}>
       <View>
@@ -48,7 +40,6 @@ export default function Filters({
             }}
             color={perfect ? colors.scrapFirstColor : "#fff"}
           />
-
           <View style={styles.titleBox}>
             <Text style={styles.fontFilters}>Comme Neuf</Text>
           </View>
@@ -64,7 +55,6 @@ export default function Filters({
             }}
             color={good ? colors.scrapFirstColor : "#fff"}
           />
-
           <View style={styles.titleBox}>
             <Text style={styles.fontFilters}>Très bon état</Text>
           </View>
@@ -96,7 +86,6 @@ export default function Filters({
             }}
             color={damaged ? colors.scrapFirstColor : "#fff"}
           />
-
           <View style={styles.titleBox}>
             <Text style={styles.fontFilters}>Abîmé</Text>
           </View>
@@ -112,23 +101,22 @@ export default function Filters({
             }}
             color={ruined ? colors.scrapFirstColor : "#fff"}
           />
-
           <View style={styles.titleBox}>
             <Text style={styles.fontFilters}>Très abîmé</Text>
           </View>
         </View>
-        {/* {console.log("Filters : searchCondition ==== > ", searchCondition)} */}
       </View>
-      <View>
+
+      <View style={{ justifyContent: "space-between" }}>
         <View>
           <Text style={[styles.fontFilters, styles.titleFilter]}>prix</Text>
           {/* Prix */}
           <View style={styles.inputBox}>
             <Checkbox
               style={styles.checkbox3}
-              value={filter.freePrice}
+              value={filter.freeScrap}
               onValueChange={(value) => {
-                handleFilter("freePrice", value);
+                handleFilter("freeScrap", value);
 
                 // isDesc && setSortDirection(null);
               }}
@@ -139,7 +127,9 @@ export default function Filters({
               <Text style={styles.fontFilters}>Gratuit</Text>
             </View>
           </View>
-          <View style={styles.titleBox}>
+        </View>
+        <View>
+          <View style={[styles.titleBox, styles.sectionSort]}>
             <Text
               style={[
                 styles.fontFilters,
@@ -153,16 +143,16 @@ export default function Filters({
           <View style={styles.inputBox}>
             <Checkbox
               style={styles.checkbox3}
-              value={filter.isAsc}
+              value={isAsc}
               onValueChange={(value) => {
                 handleFilter("isAsc", value);
+                setIsAsc(!isAsc);
                 setIsDesc(false);
-                setSortPrice(!sortPrice);
+                setSortPrice("price_asc");
                 // : setSortDirection("");
               }}
               color={isAsc ? colors.scrapFirstColor : "#fff"}
             />
-
             <View style={styles.titleBox}>
               <Text style={styles.fontFilters}>Croissant</Text>
             </View>
@@ -170,22 +160,20 @@ export default function Filters({
           <View style={styles.inputBox}>
             <Checkbox
               style={styles.checkbox3}
-              value={filter.isDesc}
+              value={isDesc}
               onValueChange={(value) => {
                 handleFilter("isDesc", value);
                 setIsAsc(false);
-                setSortPrice(!sortPrice);
+                setIsDesc(!isDesc);
+                setSortPrice("price_desc");
                 // : setSortDirection("");
               }}
               color={isDesc ? colors.scrapFirstColor : "#fff"}
             />
-
             <View style={styles.titleBox}>
               <Text style={styles.fontFilters}>Décroissant</Text>
             </View>
           </View>
-
-          {/* {console.log("Filters : searchCondition ==== > ", searchCondition)} */}
         </View>
       </View>
     </View>
@@ -197,9 +185,9 @@ const styles = StyleSheet.create({
     width: widthScreen * 0.95,
     backgroundColor: colors.scrapFirstColor,
     height: "auto",
-    padding: 5,
+    padding: 10,
     // alignItems: "center",
-    // justifyContent: "center",
+    justifyContent: "space-evenly",
     flexDirection: "row",
   },
   titleFilter: {
@@ -207,15 +195,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 5,
     letterSpacing: 1,
+    marginBottom: 5,
   },
   fontSecondTitle: {
-    marginTop: 5,
     borderColor: "#fff",
     borderBottomWidth: 1,
+    marginTop: 5,
+    fontSize: 13,
   },
   fontFilters: {
     color: "#fff",
   },
+  sectionSort: { marginTop: 15, borderTopColor: "#fff", borderTopWidth: 1 },
   //Condition
   inputBox: {
     padding: 5,

@@ -41,13 +41,15 @@ export default function HomeScreen({ navigation }) {
   const [sortPrice, setSortPrice] = useState(false);
   //
   const [filter, setFilter] = useState({
-    perfect: false,
-    good: false,
-    acceptable: false,
-    damaged: false,
-    ruined: false,
+    condition: {
+      perfect: false,
+      good: false,
+      acceptable: false,
+      damaged: false,
+      ruined: false,
+    },
     search: "",
-    freePrice: false,
+    freeScrap: false,
     isAsc: false,
     isDesc: false,
   });
@@ -72,7 +74,7 @@ export default function HomeScreen({ navigation }) {
     try {
       const res = await fetch(
         `http://localhost:3000/scraps?filter=${JSON.stringify(filter)}&sort=${
-          sortPrice ? "price-asc" : "price-desc"
+          sortPrice ? "price-desc" : "price-asc"
         }`
       );
       const data = await res.json();
