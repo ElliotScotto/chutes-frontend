@@ -9,11 +9,6 @@ import {
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 //Utils
 import colors from "../utils/colors";
-//Components
-import Filters from "./Filters";
-import { useState } from "react";
-import GreenHider from "./GreenHider.js";
-//
 //
 export default function SearchBar({
   filtersVisible,

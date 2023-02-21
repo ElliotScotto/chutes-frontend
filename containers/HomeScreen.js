@@ -35,10 +35,34 @@ export default function HomeScreen({ navigation }) {
   //Connexion
   const [backendEndpoint, setBackendEndpoint] = useState("");
   //
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filtersVisible, setFiltersVisible] = useState(false);
-  const [sortPrice, setSortPrice] = useState(false);
+  const [ascending, setAscending] = useState(false);
+  const [descending, setDescending] = useState(false);
+  const [sortDirection, setSortDirection] = useState(null);
+  //
+  const handleAscendingChange = () => {
+    if (!ascending) {
+      setAscending(true);
+      setDescending(false);
+      setSortDirection("price-asc");
+    } else {
+      setAscending(false);
+      setSortDirection(null);
+    }
+  };
+
+  const handleDescendingChange = () => {
+    if (!descending) {
+      setDescending(true);
+      setAscending(false);
+      setSortDirection("price-desc");
+    } else {
+      setDescending(false);
+      setSortDirection(null);
+    }
+  };
   //
   const [filter, setFilter] = useState({
     condition: {
@@ -60,35 +84,27 @@ export default function HomeScreen({ navigation }) {
   const handleFilter = (name, value) => {
     setFilter({ ...filter, [name]: value });
   };
-
-  const getProducts = async () => {
-    // //IOS
-    // Platform.OS === "ios" && setBackendEndpoint("localhost");
-    // //MY ANDROID SIMULATOR
-    // Platform.__constants.Model === "sdk_gphone64_arm64" &&
-    //   setBackendEndpoint("10.0.2.2");
-    // //MY PHYSICAL DEVICE HUAWEI
-    // Platform.__constants.Model === "LYA-L29" &&
-    //   setBackendEndpoint("192.168.1.38");
-    //
-    try {
-      const res = await fetch(
-        `http://localhost:3000/scraps?filter=${JSON.stringify(filter)}&sort=${
-          sortPrice ? "price-desc" : "price-asc"
-        }`
-      );
-      const data = await res.json();
-      setProducts(data);
-      setIsLoading(false);
-      // console.log("products === >", products);
-    } catch (error) {
-      console.log("HOMECREEN: error.response=====> ", error.response);
-    }
-  };
-  //
   useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/scraps?filter=${JSON.stringify(
+            filter
+          )}&sort=${sortDirection}`
+        );
+        // const data = await res.json();
+        // console.log("response.data =====> ", response.data);
+        // console.log("response.data.count =====> ", response.data.count); //Nombre de résultats selon filtres
+        setProducts(response.data.allScraps);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("HOMECREEN: error.response=====> ", error.response);
+      }
+    };
+    //
+    // useEffect(() => {
     getProducts();
-  }, [filter, sortPrice]);
+  }, [filter, sortDirection]);
   //
   return (
     <SafeAreaProvider
@@ -109,8 +125,10 @@ export default function HomeScreen({ navigation }) {
           <Filters
             filter={filter}
             handleFilter={handleFilter}
-            sortPrice={sortPrice}
-            setSortPrice={setSortPrice}
+            ascending={ascending}
+            descending={descending}
+            handleAscendingChange={handleAscendingChange}
+            handleDescendingChange={handleDescendingChange}
           />
         </View>
       )}

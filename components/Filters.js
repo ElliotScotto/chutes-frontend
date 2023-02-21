@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View, Text, Dimensions, Platform } from "react-native";
+import { StyleSheet, View, Text, Dimensions } from "react-native";
 //Packages
 import Checkbox from "expo-checkbox";
-import axios from "axios";
 //Utils
 import colors from "../utils/colors";
 //
@@ -11,8 +10,10 @@ import colors from "../utils/colors";
 export default function Filters({
   filter,
   handleFilter,
-  sortPrice,
-  setSortPrice,
+  ascending,
+  descending,
+  handleAscendingChange,
+  handleDescendingChange,
 }) {
   //Condition
   const [perfect, setPerfect] = useState(false);
@@ -143,14 +144,8 @@ export default function Filters({
           <View style={styles.inputBox}>
             <Checkbox
               style={styles.checkbox3}
-              value={isAsc}
-              onValueChange={(value) => {
-                handleFilter("isAsc", value);
-                setIsAsc(!isAsc);
-                setIsDesc(false);
-                setSortPrice("price_asc");
-                // : setSortDirection("");
-              }}
+              value={ascending}
+              onValueChange={handleAscendingChange}
               color={isAsc ? colors.scrapFirstColor : "#fff"}
             />
             <View style={styles.titleBox}>
@@ -160,14 +155,8 @@ export default function Filters({
           <View style={styles.inputBox}>
             <Checkbox
               style={styles.checkbox3}
-              value={isDesc}
-              onValueChange={(value) => {
-                handleFilter("isDesc", value);
-                setIsAsc(false);
-                setIsDesc(!isDesc);
-                setSortPrice("price_desc");
-                // : setSortDirection("");
-              }}
+              value={descending}
+              onValueChange={handleDescendingChange}
               color={isDesc ? colors.scrapFirstColor : "#fff"}
             />
             <View style={styles.titleBox}>
