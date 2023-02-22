@@ -30,7 +30,7 @@ export default function SearchBar({
         </View>
         <View style={styles.inputSearch}>
           <TextInput
-            placeholder="Rechercher par nom"
+            placeholder="Rechercher un nom et dans la description"
             autoCapitalize="none"
             onChangeText={handleSearch}
             value={filter.search}

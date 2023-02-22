@@ -10,11 +10,11 @@ let arrowDisplay;
 export default function ArrowSwiper({ title }) {
   let arrowFont = "";
   let arrowColor = "";
-
   {
     title === "Dimensions" ? (
       <>
-        {(arrowFont = "black")}; {(arrowColor = colors.scrapFirstColor)}
+        {(arrowFont = colors.lightBlack)};{" "}
+        {(arrowColor = colors.scrapFirstColor)}
       </>
     ) : (
       <>

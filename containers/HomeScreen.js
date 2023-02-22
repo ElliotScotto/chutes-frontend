@@ -233,25 +233,60 @@ export default function HomeScreen({ navigation }) {
                       }}
                     >
                       <View style={styles.CardScrapLeft}>
-                        <View style={styles.displayNameScrap}>
-                          <Text style={styles.nameScrap} numberOfLines={1}>
+                        <View style={[styles.displayNameScrap, styles.margBot]}>
+                          <Text
+                            style={[styles.nameScrap, styles.lightBlack]}
+                            numberOfLines={1}
+                          >
                             {item.name}
                           </Text>
                         </View>
-
-                        <Text style={styles.lightBlack}>
-                          Etat: {item.condition}
-                        </Text>
-                        <Text style={styles.lightBlack}>
-                          Quantité: {item.quantity}
-                        </Text>
-                        {item.price === 0 || item.isFree === true ? (
-                          <Text>Gratuit</Text>
-                        ) : (
-                          <Text style={styles.lightBlack}>
-                            Prix: {item.price} €
+                        <View style={[styles.row, styles.margBot]}>
+                          <Text
+                            style={[styles.lightBlack, styles.quantityAndPrice]}
+                          >
+                            Etat:
                           </Text>
-                        )}
+                          <Text style={styles.lightBlack}>
+                            {item.condition}
+                          </Text>
+                        </View>
+
+                        <View style={[styles.row, styles.margBot]}>
+                          <Text
+                            style={[styles.lightBlack, styles.quantityAndPrice]}
+                          >
+                            Quantité:
+                          </Text>
+                          <Text style={styles.lightBlack}>{item.quantity}</Text>
+                          <Text style={[styles.separator, styles.lightBlack]}>
+                            |
+                          </Text>
+                          {item.price === 0 || item.isFree === true ? (
+                            <Text style={styles.lightBlack}>Gratuit</Text>
+                          ) : (
+                            <>
+                              <Text
+                                style={[
+                                  styles.lightBlack,
+                                  styles.quantityAndPrice,
+                                ]}
+                              >
+                                Prix:
+                              </Text>
+                              <Text
+                                style={[
+                                  styles.lightBlack,
+                                  styles.quantityAndPrice,
+                                ]}
+                              >
+                                {item.price}
+                              </Text>
+                              <Text style={styles.lightBlack}>€</Text>
+                            </>
+                          )}
+                        </View>
+
                         <View style={styles.allDelivery}>
                           {item.homePickup ? (
                             <MaterialCommunityIcons
@@ -314,7 +349,7 @@ export default function HomeScreen({ navigation }) {
                     <View style={styles.displayDimensions}>
                       <View>
                         {item.length ? (
-                          <View style={{ flexDirection: "row" }}>
+                          <View style={styles.row}>
                             <Text style={styles.fontSecondCard}>
                               Longueur : {item.length}
                             </Text>
@@ -355,7 +390,7 @@ export default function HomeScreen({ navigation }) {
                           </Text>
                         )}
                         {item.width ? (
-                          <View style={{ flexDirection: "row" }}>
+                          <View style={styles.row}>
                             <Text style={styles.fontSecondCard}>
                               Largeur : {item.width}
                             </Text>
@@ -396,7 +431,7 @@ export default function HomeScreen({ navigation }) {
                       </View>
                       <View>
                         {item.diameter ? (
-                          <View style={{ flexDirection: "row" }}>
+                          <View style={styles.row}>
                             <Text style={styles.fontSecondCard}>
                               Diamètre : {item.diameter}
                             </Text>
@@ -437,7 +472,7 @@ export default function HomeScreen({ navigation }) {
                           </Text>
                         )}
                         {item.thickness ? (
-                          <View style={{ flexDirection: "row" }}>
+                          <View style={styles.row}>
                             <Text style={styles.fontSecondCard}>
                               Epaisseur : {item.thickness}
                             </Text>
@@ -478,7 +513,7 @@ export default function HomeScreen({ navigation }) {
                           </Text>
                         )}
                         {item.depth ? (
-                          <View style={{ flexDirection: "row" }}>
+                          <View style={styles.row}>
                             <Text style={styles.fontSecondCard}>
                               Profondeur : {item.depth}
                             </Text>
@@ -683,6 +718,8 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     width: "69%",
   },
+  row: { flexDirection: "row" },
+  margBot: { marginBottom: 3 },
   displayNameScrap: {
     // borderColor: "black",
     // borderWidth: 1,
@@ -691,6 +728,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "700",
   },
+  quantityAndPrice: { marginRight: 3 },
+  separator: { marginLeft: 5, marginRight: 5 },
   CardScrapRight: {
     width: 105,
     justifyContent: "flex-end",
