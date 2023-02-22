@@ -259,9 +259,7 @@ export default function HomeScreen({ navigation }) {
                             Quantité:
                           </Text>
                           <Text style={styles.lightBlack}>{item.quantity}</Text>
-                          <Text style={[styles.separator, styles.lightBlack]}>
-                            |
-                          </Text>
+                          <Text style={styles.separator}>|</Text>
                           {item.price === 0 || item.isFree === true ? (
                             <Text style={styles.lightBlack}>Gratuit</Text>
                           ) : (
@@ -729,7 +727,12 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   quantityAndPrice: { marginRight: 3 },
-  separator: { marginLeft: 5, marginRight: 5 },
+  separator: {
+    marginLeft: 5,
+    marginRight: 5,
+    color: colors.scrapFirstColor,
+    fontWeight: "bold",
+  },
   CardScrapRight: {
     width: 105,
     justifyContent: "flex-end",

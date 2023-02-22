@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Dimensions } from "react-native";
 //Packages
 import Checkbox from "expo-checkbox";
-// import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 // <AntDesign name="check" size={24} color="black" />
 //Utils
 import colors from "../utils/colors";
@@ -280,7 +280,7 @@ export default function Filters({
           </View>
         </View>
       </View>
-      <View style={{ justifyContent: "space-between" }}>
+      <View style={{ justifyContent: "space-evenly" }}>
         <View>
           <Text style={[styles.fontFilters, styles.titleFilter]}>prix</Text>
           {/* Prix */}
