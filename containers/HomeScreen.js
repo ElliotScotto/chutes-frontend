@@ -30,6 +30,15 @@ import displayDate from "../utils/displayDate";
 import colors from "../utils/colors";
 import { globalWhite } from "../utils/globalWhite";
 //
+let serverUrl = "";
+// Condition pour déterminer l'adresse IP ou le nom d'hôte selon la plateforme
+if (Platform.__constants.Model === "sdk_gphone64_arm64") {
+  serverUrl = "http://10.0.2.2:3000"; // Adresse IP pour Android
+} else if (Platform.OS === "ios") {
+  serverUrl = "http://localhost:3000"; // Nom d'hôte pour iOS
+} else if (Platform.__constants.Model === "LYA-L29") {
+  serverUrl = "http://192.168.1.38:3000"; // Nom d'hôte pour mon smartphone
+}
 //
 export default function HomeScreen({ navigation }) {
   //Connexion
@@ -65,6 +74,7 @@ export default function HomeScreen({ navigation }) {
   };
   //
   const [filter, setFilter] = useState({
+    search: "",
     condition: {
       perfect: false,
       good: false,
@@ -72,10 +82,20 @@ export default function HomeScreen({ navigation }) {
       damaged: false,
       ruined: false,
     },
-    search: "",
     freeScrap: false,
-    isAsc: false,
-    isDesc: false,
+    category: {
+      quincaillerie: false,
+      outils: false,
+      peinture: false,
+      sol: false,
+      electricite: false,
+      plomberie: false,
+      toiture: false,
+      menuiserie: false,
+      grosOeuvre: false,
+      jardin: false,
+      divers: false,
+    },
   });
   //
   const handleSearch = (text) => {
@@ -88,7 +108,7 @@ export default function HomeScreen({ navigation }) {
     const getProducts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/scraps?filter=${JSON.stringify(
+          `${serverUrl}/scraps?filter=${JSON.stringify(
             filter
           )}&sort=${sortDirection}`
         );
@@ -237,7 +257,7 @@ export default function HomeScreen({ navigation }) {
                             <MaterialCommunityIcons
                               name="home-circle"
                               size={24}
-                              color="#568b44"
+                              color={colors.scrapFirstColor}
                             />
                           ) : (
                             <MaterialCommunityIcons
@@ -250,7 +270,7 @@ export default function HomeScreen({ navigation }) {
                             <MaterialCommunityIcons
                               name="send-circle"
                               size={24}
-                              color="#568b44"
+                              color={colors.scrapFirstColor}
                             />
                           ) : (
                             <MaterialCommunityIcons
@@ -267,7 +287,7 @@ export default function HomeScreen({ navigation }) {
                             name="image-off-outline"
                             resizeMode="cover"
                             size={105}
-                            color="#568b44"
+                            color="lightgray"
                             style={styles.mainPictureScrap}
                           />
                         ) : (
@@ -702,7 +722,7 @@ const styles = StyleSheet.create({
   secondDisplayCardScrap: {
     width: widthScreen,
     height: 138,
-    backgroundColor: "#568b44",
+    backgroundColor: colors.scrapFirstColor,
     justifyContent: "space-between",
     paddingTop: 10,
     paddingLeft: 10,
@@ -736,7 +756,7 @@ const styles = StyleSheet.create({
     height: 138,
     backgroundColor: "#fff",
     padding: 10,
-    borderBottomColor: "#568b44",
+    borderBottomColor: colors.scrapFirstColor,
     borderBottomWidth: 1,
   },
   displayDetails: {
@@ -745,7 +765,7 @@ const styles = StyleSheet.create({
     // borderColor: "black",
     // borderWidth: 1,
   },
-  fontThirdCard: { color: "#566844" },
+  fontThirdCard: { color: colors.scrapFirstColor },
   lightBlack: { color: "#151515" },
   detailsTitle: { fontSize: 16, fontWeight: "500", marginBottom: 10 },
   thirdCardRight: {
@@ -759,11 +779,11 @@ const styles = StyleSheet.create({
     padding: 8,
     height: 80,
     width: "auto",
-    borderColor: "#568b44",
+    borderColor: colors.scrapFirstColor,
     borderWidth: 2,
     borderRadius: 3,
     alignItems: "center",
     justifyContent: "center",
   },
-  fontBtnScrapId: { color: "#568b44" },
+  fontBtnScrapId: { color: colors.scrapFirstColor },
 });

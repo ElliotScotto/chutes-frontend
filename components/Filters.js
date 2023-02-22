@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Dimensions } from "react-native";
 //Packages
 import Checkbox from "expo-checkbox";
+import { AntDesign } from "@expo/vector-icons";
 //Utils
 import colors from "../utils/colors";
+
 //
 
 //
@@ -16,12 +18,12 @@ export default function Filters({
   handleDescendingChange,
 }) {
   //Condition
-  const [perfect, setPerfect] = useState(false);
-  const [good, setGood] = useState(false);
-  const [acceptable, setAcceptable] = useState(false);
-  const [damaged, setDamaged] = useState(false);
-  const [ruined, setRuined] = useState(false);
-  const [freePrice, setFreePrice] = useState(false);
+  // const [perfect, setPerfect] = useState(false);
+  // const [good, setGood] = useState(false);
+  // const [acceptable, setAcceptable] = useState(false);
+  // const [damaged, setDamaged] = useState(false);
+  // const [ruined, setRuined] = useState(false);
+  // const [freePrice, setFreePrice] = useState(false);
   const [isAsc, setIsAsc] = useState(false);
   const [isDesc, setIsDesc] = useState(false);
 
@@ -39,7 +41,7 @@ export default function Filters({
                 handleFilter("perfect", value);
               }
             }}
-            color={perfect ? colors.scrapFirstColor : "#fff"}
+            color={filter.perfect ? colors.scrapFirstColor : "#fff"}
           />
           <View style={styles.titleBox}>
             <Text style={styles.fontFilters}>Comme Neuf</Text>
@@ -54,8 +56,9 @@ export default function Filters({
                 handleFilter("good", value);
               }
             }}
-            color={good ? colors.scrapFirstColor : "#fff"}
+            color={filter.good ? colors.scrapFirstColor : "#fff"}
           />
+
           <View style={styles.titleBox}>
             <Text style={styles.fontFilters}>Très bon état</Text>
           </View>
@@ -69,7 +72,7 @@ export default function Filters({
                 handleFilter("acceptable", value);
               }
             }}
-            color={acceptable ? colors.scrapFirstColor : "#fff"}
+            color={filter.acceptable ? colors.scrapFirstColor : "#fff"}
           />
 
           <View style={styles.titleBox}>
@@ -85,7 +88,7 @@ export default function Filters({
                 handleFilter("damaged", value);
               }
             }}
-            color={damaged ? colors.scrapFirstColor : "#fff"}
+            color={filter.damaged ? colors.scrapFirstColor : "#fff"}
           />
           <View style={styles.titleBox}>
             <Text style={styles.fontFilters}>Abîmé</Text>
@@ -100,14 +103,184 @@ export default function Filters({
                 handleFilter("ruined", value);
               }
             }}
-            color={ruined ? colors.scrapFirstColor : "#fff"}
+            color={filter.ruined ? colors.scrapFirstColor : "#fff"}
           />
           <View style={styles.titleBox}>
             <Text style={styles.fontFilters}>Très abîmé</Text>
           </View>
         </View>
       </View>
+      <View>
+        <Text style={[styles.fontFilters, styles.titleFilter]}>catégorie</Text>
+        {/* Catégorie */}
+        <View style={styles.inputBox}>
+          <Checkbox
+            style={styles.checkbox3}
+            value={filter.quincaillerie}
+            onValueChange={(value) => {
+              {
+                handleFilter("quincaillerie", value);
+              }
+            }}
+            color={filter.quincaillerie ? colors.scrapFirstColor : "#fff"}
+          />
+          <View style={styles.titleBox}>
+            <Text style={styles.fontFilters}>Quincaillerie</Text>
+          </View>
+        </View>
+        <View style={styles.inputBox}>
+          <Checkbox
+            style={styles.checkbox3}
+            value={filter.outils}
+            onValueChange={(value) => {
+              {
+                handleFilter("outils", value);
+              }
+            }}
+            color={filter.outils ? colors.scrapFirstColor : "#fff"}
+          />
 
+          <View style={styles.titleBox}>
+            <Text style={styles.fontFilters}>Outils</Text>
+          </View>
+        </View>
+        <View style={styles.inputBox}>
+          <Checkbox
+            style={styles.checkbox3}
+            value={filter.peinture}
+            onValueChange={(value) => {
+              {
+                handleFilter("peinture", value);
+              }
+            }}
+            color={filter.peinture ? colors.scrapFirstColor : "#fff"}
+          />
+
+          <View style={styles.titleBox}>
+            <Text style={styles.fontFilters}>Peinture</Text>
+          </View>
+        </View>
+        <View style={styles.inputBox}>
+          <Checkbox
+            style={styles.checkbox3}
+            value={filter.sol}
+            onValueChange={(value) => {
+              {
+                handleFilter("sol", value);
+              }
+            }}
+            color={filter.sol ? colors.scrapFirstColor : "#fff"}
+          />
+          <View style={styles.titleBox}>
+            <Text style={styles.fontFilters}>Sol</Text>
+          </View>
+        </View>
+        <View style={styles.inputBox}>
+          <Checkbox
+            style={styles.checkbox3}
+            value={filter.electricite}
+            onValueChange={(value) => {
+              {
+                handleFilter("electricite", value);
+              }
+            }}
+            color={filter.electricite ? colors.scrapFirstColor : "#fff"}
+          />
+          <View style={styles.titleBox}>
+            <Text style={styles.fontFilters}>Electricité</Text>
+          </View>
+        </View>
+        <View style={styles.inputBox}>
+          <Checkbox
+            style={styles.checkbox3}
+            value={filter.plomberie}
+            onValueChange={(value) => {
+              {
+                handleFilter("plomberie", value);
+              }
+            }}
+            color={filter.plomberie ? colors.scrapFirstColor : "#fff"}
+          />
+          <View style={styles.titleBox}>
+            <Text style={styles.fontFilters}>Plomberie</Text>
+          </View>
+        </View>
+        <View style={styles.inputBox}>
+          <Checkbox
+            style={styles.checkbox3}
+            value={filter.toiture}
+            onValueChange={(value) => {
+              {
+                handleFilter("toiture", value);
+              }
+            }}
+            color={filter.toiture ? colors.scrapFirstColor : "#fff"}
+          />
+          <View style={styles.titleBox}>
+            <Text style={styles.fontFilters}>Toiture</Text>
+          </View>
+        </View>
+        <View style={styles.inputBox}>
+          <Checkbox
+            style={styles.checkbox3}
+            value={filter.menuiserie}
+            onValueChange={(value) => {
+              {
+                handleFilter("menuiserie", value);
+              }
+            }}
+            color={filter.menuiserie ? colors.scrapFirstColor : "#fff"}
+          />
+          <View style={styles.titleBox}>
+            <Text style={styles.fontFilters}>menuiserie</Text>
+          </View>
+        </View>
+        <View style={styles.inputBox}>
+          <Checkbox
+            style={styles.checkbox3}
+            value={filter.grosOeuvre}
+            onValueChange={(value) => {
+              {
+                handleFilter("grosOeuvre", value);
+              }
+            }}
+            color={filter.grosOeuvre ? colors.scrapFirstColor : "#fff"}
+          />
+          <View style={styles.titleBox}>
+            <Text style={styles.fontFilters}>Gros-Oeuvre</Text>
+          </View>
+        </View>
+        <View style={styles.inputBox}>
+          <Checkbox
+            style={styles.checkbox3}
+            value={filter.jardin}
+            onValueChange={(value) => {
+              {
+                handleFilter("jardin", value);
+              }
+            }}
+            color={filter.jardin ? colors.scrapFirstColor : "#fff"}
+          />
+          <View style={styles.titleBox}>
+            <Text style={styles.fontFilters}>Jardin</Text>
+          </View>
+        </View>
+        <View style={styles.inputBox}>
+          <Checkbox
+            style={styles.checkbox3}
+            value={filter.divers}
+            onValueChange={(value) => {
+              {
+                handleFilter("divers", value);
+              }
+            }}
+            color={filter.divers ? colors.scrapFirstColor : "#fff"}
+          />
+          <View style={styles.titleBox}>
+            <Text style={styles.fontFilters}>Divers</Text>
+          </View>
+        </View>
+      </View>
       <View style={{ justifyContent: "space-between" }}>
         <View>
           <Text style={[styles.fontFilters, styles.titleFilter]}>prix</Text>
@@ -121,7 +294,7 @@ export default function Filters({
 
                 // isDesc && setSortDirection(null);
               }}
-              color={freePrice ? colors.scrapFirstColor : "#fff"}
+              color={filter.freeScrap ? colors.scrapFirstColor : "#fff"}
             />
 
             <View style={styles.titleBox}>
@@ -146,7 +319,7 @@ export default function Filters({
               style={styles.checkbox3}
               value={ascending}
               onValueChange={handleAscendingChange}
-              color={isAsc ? colors.scrapFirstColor : "#fff"}
+              color={filter.isAsc ? colors.scrapFirstColor : "#fff"}
             />
             <View style={styles.titleBox}>
               <Text style={styles.fontFilters}>Croissant</Text>
@@ -157,7 +330,7 @@ export default function Filters({
               style={styles.checkbox3}
               value={descending}
               onValueChange={handleDescendingChange}
-              color={isDesc ? colors.scrapFirstColor : "#fff"}
+              color={filter.isDesc ? colors.scrapFirstColor : "#fff"}
             />
             <View style={styles.titleBox}>
               <Text style={styles.fontFilters}>Décroissant</Text>
