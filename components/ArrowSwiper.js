@@ -1,6 +1,6 @@
 import React from "react";
-import { useState } from "react";
-import { View, StyleSheet, Dimensions, Text, Platform } from "react-native";
+// import { useState } from "react";
+import { View, StyleSheet, Dimensions, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 //Utils
 import colors from "../utils/colors";
@@ -8,25 +8,29 @@ import colors from "../utils/colors";
 let arrowDisplay;
 //
 export default function ArrowSwiper({ title }) {
-  let arrowStyle = "";
+  let arrowFont = "";
+  let arrowColor = "";
 
   {
-    title === "Dimensions" ? (arrowStyle = "black") : (arrowStyle = "#fff");
+    title === "Dimensions" ? (
+      <>
+        {(arrowFont = "black")}; {(arrowColor = colors.scrapFirstColor)}
+      </>
+    ) : (
+      <>
+        {(arrowFont = "#fff")};{(arrowColor = "#fff")}
+      </>
+    );
   }
   return (
-    <View
-      style={[
-        styles.mainContainer,
-        { borderBottomColor: colors.scrapFirstColor },
-      ]}
-    >
-      <Text style={{ color: arrowStyle }}>{title}</Text>
+    <View style={[styles.mainContainer, { borderBottomColor: arrowColor }]}>
+      <Text style={{ color: arrowFont }}>{title}</Text>
 
       <MaterialCommunityIcons
         style={styles.arrow}
         name="arrow-right"
         size={18}
-        color={colors.scrapFirstColor}
+        color={arrowColor}
       />
     </View>
   );

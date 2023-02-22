@@ -2,12 +2,10 @@ import { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Dimensions } from "react-native";
 //Packages
 import Checkbox from "expo-checkbox";
-import { AntDesign } from "@expo/vector-icons";
+// import { AntDesign } from "@expo/vector-icons";
+// <AntDesign name="check" size={24} color="black" />
 //Utils
 import colors from "../utils/colors";
-
-//
-
 //
 export default function Filters({
   filter,
@@ -24,8 +22,9 @@ export default function Filters({
   // const [damaged, setDamaged] = useState(false);
   // const [ruined, setRuined] = useState(false);
   // const [freePrice, setFreePrice] = useState(false);
-  const [isAsc, setIsAsc] = useState(false);
-  const [isDesc, setIsDesc] = useState(false);
+  //Sort Price
+  // const [isAsc, setIsAsc] = useState(false);
+  // const [isDesc, setIsDesc] = useState(false);
 
   return (
     <View style={styles.mainContainerFilters}>
@@ -125,7 +124,7 @@ export default function Filters({
             color={filter.quincaillerie ? colors.scrapFirstColor : "#fff"}
           />
           <View style={styles.titleBox}>
-            <Text style={styles.fontFilters}>Quincaillerie</Text>
+            <Text style={styles.fontFilters}>quincaillerie</Text>
           </View>
         </View>
         <View style={styles.inputBox}>
@@ -141,7 +140,7 @@ export default function Filters({
           />
 
           <View style={styles.titleBox}>
-            <Text style={styles.fontFilters}>Outils</Text>
+            <Text style={styles.fontFilters}>outils</Text>
           </View>
         </View>
         <View style={styles.inputBox}>
@@ -157,7 +156,7 @@ export default function Filters({
           />
 
           <View style={styles.titleBox}>
-            <Text style={styles.fontFilters}>Peinture</Text>
+            <Text style={styles.fontFilters}>peinture</Text>
           </View>
         </View>
         <View style={styles.inputBox}>
@@ -172,7 +171,7 @@ export default function Filters({
             color={filter.sol ? colors.scrapFirstColor : "#fff"}
           />
           <View style={styles.titleBox}>
-            <Text style={styles.fontFilters}>Sol</Text>
+            <Text style={styles.fontFilters}>sol</Text>
           </View>
         </View>
         <View style={styles.inputBox}>
@@ -187,7 +186,7 @@ export default function Filters({
             color={filter.electricite ? colors.scrapFirstColor : "#fff"}
           />
           <View style={styles.titleBox}>
-            <Text style={styles.fontFilters}>Electricité</Text>
+            <Text style={styles.fontFilters}>electricité</Text>
           </View>
         </View>
         <View style={styles.inputBox}>
@@ -202,7 +201,7 @@ export default function Filters({
             color={filter.plomberie ? colors.scrapFirstColor : "#fff"}
           />
           <View style={styles.titleBox}>
-            <Text style={styles.fontFilters}>Plomberie</Text>
+            <Text style={styles.fontFilters}>plomberie</Text>
           </View>
         </View>
         <View style={styles.inputBox}>
@@ -217,7 +216,7 @@ export default function Filters({
             color={filter.toiture ? colors.scrapFirstColor : "#fff"}
           />
           <View style={styles.titleBox}>
-            <Text style={styles.fontFilters}>Toiture</Text>
+            <Text style={styles.fontFilters}>toiture</Text>
           </View>
         </View>
         <View style={styles.inputBox}>
@@ -247,7 +246,7 @@ export default function Filters({
             color={filter.grosOeuvre ? colors.scrapFirstColor : "#fff"}
           />
           <View style={styles.titleBox}>
-            <Text style={styles.fontFilters}>Gros-Oeuvre</Text>
+            <Text style={styles.fontFilters}>gros-oeuvre</Text>
           </View>
         </View>
         <View style={styles.inputBox}>
@@ -262,7 +261,7 @@ export default function Filters({
             color={filter.jardin ? colors.scrapFirstColor : "#fff"}
           />
           <View style={styles.titleBox}>
-            <Text style={styles.fontFilters}>Jardin</Text>
+            <Text style={styles.fontFilters}>jardin</Text>
           </View>
         </View>
         <View style={styles.inputBox}>
@@ -277,7 +276,7 @@ export default function Filters({
             color={filter.divers ? colors.scrapFirstColor : "#fff"}
           />
           <View style={styles.titleBox}>
-            <Text style={styles.fontFilters}>Divers</Text>
+            <Text style={styles.fontFilters}>divers</Text>
           </View>
         </View>
       </View>
@@ -298,7 +297,7 @@ export default function Filters({
             />
 
             <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>Gratuit</Text>
+              <Text style={styles.fontFilters}>gratuit</Text>
             </View>
           </View>
         </View>
@@ -322,7 +321,7 @@ export default function Filters({
               color={filter.isAsc ? colors.scrapFirstColor : "#fff"}
             />
             <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>Croissant</Text>
+              <Text style={styles.fontFilters}>croissant</Text>
             </View>
           </View>
           <View style={styles.inputBox}>
@@ -333,7 +332,7 @@ export default function Filters({
               color={filter.isDesc ? colors.scrapFirstColor : "#fff"}
             />
             <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>Décroissant</Text>
+              <Text style={styles.fontFilters}>décroissant</Text>
             </View>
           </View>
         </View>
@@ -367,6 +366,7 @@ const styles = StyleSheet.create({
   },
   fontFilters: {
     color: "#fff",
+    textTransform: "capitalize",
   },
   sectionSort: { marginTop: 15, borderTopColor: "#fff", borderTopWidth: 1 },
   //Condition
