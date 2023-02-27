@@ -1,17 +1,10 @@
 import { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, Text, Dimensions } from "react-native";
 //Packages
 import Checkbox from "expo-checkbox";
-import { Ionicons } from "@expo/vector-icons";
-// <AntDesign name="check" size={24} color="black" />
 //Utils
 import colors from "../utils/colors";
+import FilterButton from "../utils/FilterButton";
 //
 export default function Filters({
   filter,
@@ -126,199 +119,106 @@ export default function Filters({
         <Text style={[styles.fontFilters, styles.titleFilter]}>catégorie</Text>
         <View style={[styles.wrap, styles.pad, styles.row, styles.spaceB]}>
           <View style={styles.inputBox}>
-            <TouchableOpacity></TouchableOpacity>
-            <Checkbox
-              style={styles.checkbox3}
+            <FilterButton
+              label="Quincaillerie"
               value={filter.quincaillerie}
-              onValueChange={(value) => {
-                {
-                  handleFilter("quincaillerie", value);
-                }
+              onPress={(value) => {
+                handleFilter("quincaillerie", value);
               }}
-              color={
-                filter.quincaillerie
-                  ? colors.scrapFirstColor
-                  : colors.lightBlack
-              }
             />
-            <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>quincaillerie</Text>
-            </View>
           </View>
           <View style={styles.inputBox}>
-            <Checkbox
-              style={styles.checkbox3}
+            <FilterButton
+              label="Outils"
               value={filter.outils}
-              onValueChange={(value) => {
-                {
-                  handleFilter("outils", value);
-                }
+              onPress={(value) => {
+                handleFilter("outils", value);
               }}
-              color={filter.outils ? colors.scrapFirstColor : colors.lightBlack}
             />
-
-            <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>outils</Text>
-            </View>
           </View>
           <View style={styles.inputBox}>
-            <Checkbox
-              style={styles.checkbox3}
+            <FilterButton
+              label="Peinture"
               value={filter.peinture}
-              onValueChange={(value) => {
-                {
-                  handleFilter("peinture", value);
-                }
+              onPress={(value) => {
+                handleFilter("peinture", value);
               }}
-              color={
-                filter.peinture ? colors.scrapFirstColor : colors.lightBlack
-              }
             />
-
-            <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>peinture</Text>
-            </View>
           </View>
-
           <View style={styles.inputBox}>
-            <Checkbox
-              style={styles.checkbox3}
+            <FilterButton
+              label="Electricité"
               value={filter.electricite}
-              onValueChange={(value) => {
-                {
-                  handleFilter("electricite", value);
-                }
+              onPress={(value) => {
+                handleFilter("electricite", value);
               }}
-              color={
-                filter.electricite ? colors.scrapFirstColor : colors.lightBlack
-              }
             />
-            <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>electricité</Text>
-            </View>
           </View>
           <View style={styles.inputBox}>
-            <Checkbox
-              style={styles.checkbox3}
+            <FilterButton
+              label="Plomberie"
               value={filter.plomberie}
-              onValueChange={(value) => {
-                {
-                  handleFilter("plomberie", value);
-                }
+              onPress={(value) => {
+                handleFilter("plomberie", value);
               }}
-              color={
-                filter.plomberie ? colors.scrapFirstColor : colors.lightBlack
-              }
             />
-            <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>plomberie</Text>
-            </View>
           </View>
           <View style={styles.inputBox}>
-            <Checkbox
-              style={styles.checkbox3}
+            <FilterButton
+              label="Toiture"
               value={filter.toiture}
-              onValueChange={(value) => {
-                {
-                  handleFilter("toiture", value);
-                }
+              onPress={(value) => {
+                handleFilter("toiture", value);
               }}
-              color={
-                filter.toiture ? colors.scrapFirstColor : colors.lightBlack
-              }
             />
-            <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>toiture</Text>
-            </View>
           </View>
           <View style={styles.inputBox}>
-            <Checkbox
-              style={styles.checkbox3}
+            <FilterButton
+              label="Menuiserie"
               value={filter.menuiserie}
-              onValueChange={(value) => {
-                {
-                  handleFilter("menuiserie", value);
-                }
+              onPress={(value) => {
+                handleFilter("menuiserie", value);
               }}
-              color={
-                filter.menuiserie ? colors.scrapFirstColor : colors.lightBlack
-              }
             />
-            <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>menuiserie</Text>
-            </View>
           </View>
           <View style={styles.inputBox}>
-            <Checkbox
-              style={styles.checkbox3}
-              value={filter.grosOeuvre}
-              onValueChange={(value) => {
-                {
-                  handleFilter("grosOeuvre", value);
-                }
+            <FilterButton
+              label="Sol"
+              value={filter.sol}
+              onPress={(value) => {
+                handleFilter("sol", value);
               }}
-              color={
-                filter.grosOeuvre ? colors.scrapFirstColor : colors.lightBlack
-              }
             />
-            <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>gros-oeuvre</Text>
-            </View>
           </View>
+
           <View style={styles.inputBox}>
-            <Checkbox
-              style={styles.checkbox3}
+            <FilterButton
+              label="Jardin"
               value={filter.jardin}
-              onValueChange={(value) => {
-                {
-                  handleFilter("jardin", value);
-                }
+              onPress={(value) => {
+                handleFilter("jardin", value);
               }}
-              color={filter.jardin ? colors.scrapFirstColor : colors.lightBlack}
             />
-            <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>jardin</Text>
-            </View>
           </View>
         </View>
-        <View
-          style={[
-            styles.wrap,
-            styles.pad,
-            styles.row,
-            styles.mBot,
-            styles.spaceA,
-          ]}
-        >
+        <View style={[styles.wrap, styles.pad, styles.row, styles.spaceE]}>
           <View style={styles.inputBox}>
-            <Checkbox
-              style={styles.checkbox3}
-              value={filter.sol}
-              onValueChange={(value) => {
-                {
-                  handleFilter("sol", value);
-                }
+            <FilterButton
+              label="Gros-oeuvre"
+              value={filter.grosOeuvre}
+              onPress={(value) => {
+                handleFilter("grosOeuvre", value);
               }}
-              color={filter.sol ? colors.scrapFirstColor : colors.lightBlack}
             />
-            <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>sol</Text>
-            </View>
           </View>
           <View style={styles.inputBox}>
-            <Checkbox
-              style={styles.checkbox3}
+            <FilterButton
+              label="Divers"
               value={filter.divers}
-              onValueChange={(value) => {
-                {
-                  handleFilter("divers", value);
-                }
+              onPress={(value) => {
+                handleFilter("divers", value);
               }}
-              color={filter.divers ? colors.scrapFirstColor : colors.lightBlack}
             />
-            <View style={styles.titleBox}>
-              <Text style={styles.fontFilters}>divers</Text>
-            </View>
           </View>
         </View>
       </View>
@@ -385,6 +285,8 @@ const styles = StyleSheet.create({
     width: widthScreen * 0.95,
     borderColor: colors.scrapFirstColor,
     borderWidth: 1,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
     height: "auto",
     padding: 10,
     // alignItems: "center",
@@ -398,6 +300,7 @@ const styles = StyleSheet.create({
   mBot: { marginBottom: 15 },
   spaceA: { justifyContent: "space-around" },
   spaceB: { justifyContent: "space-between" },
+  spaceE: { justifyContent: "space-evenly" },
   titleFilter: {
     textTransform: "uppercase",
     fontWeight: "bold",
