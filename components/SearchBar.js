@@ -14,7 +14,9 @@ export default function SearchBar({
   filtersVisible,
   setFiltersVisible,
   handleSearch,
+  handleFilter,
   filter,
+  navigation,
 }) {
   return (
     <View style={styles.mainSearchView}>

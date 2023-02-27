@@ -138,7 +138,9 @@ export default function HomeScreen({ navigation }) {
         filtersVisible={filtersVisible}
         setFiltersVisible={setFiltersVisible}
         handleSearch={handleSearch}
+        handleFilter={handleFilter}
         filter={filter}
+        navigation={navigation}
       />
       {filtersVisible && (
         <View style={{ alignItems: "center" }}>

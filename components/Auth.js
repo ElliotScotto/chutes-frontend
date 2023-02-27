@@ -18,6 +18,7 @@ import CreateScreen from "../containers/CreateScreen";
 import UploadScreen from "../containers/UploadScreen";
 import ProfileScreen from "../containers/ProfileScreen";
 import WelcomeScreen from "../containers/WelcomeScreen";
+
 //Components
 import SearchBar from "./SearchBar";
 import Logo from "./Logo";
@@ -68,6 +69,7 @@ const DisplayTabs = () => {
             },
           }}
         />
+
         <Tab.Screen
           name="Create"
           component={CreateScreen}
@@ -75,10 +77,10 @@ const DisplayTabs = () => {
             tabBarIcon: ({ color, size }) => (
               <AntDesign name={"addfile"} size={size} color={color} />
             ),
-            title: "Créer votre produit",
+            title: "CREER",
             headerShown: true,
             headerTintColor: "#fff",
-            headerStyle: { backgroundColor: "#568b44" },
+            headerStyle: { backgroundColor: colors.scrapFirstColor },
           }}
         />
         <Tab.Screen
@@ -100,6 +102,7 @@ const Auth = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Tabs" component={DisplayTabs} />
+
         <Stack.Screen
           name="Product"
           component={ProductScreen}
@@ -108,7 +111,7 @@ const Auth = () => {
             return {
               title: null,
               headerShown: true,
-              headerTintColor: "#568b44",
+              headerTintColor: colors.scrapFirstColor,
               headerBackVisible: true,
               headerBackTitleVisible: true,
               headerBackTitle: "Chutes", // ou Back = options.route.params.screen,
@@ -128,7 +131,10 @@ const Auth = () => {
               headerBackTitleVisible: true,
               headerBackTitle: "Caractéristiques", // ou Back = options.route.params.screen,
               headerTintColor: "#fff",
-              headerStyle: { backgroundColor: "#568b44", height: 20 },
+              headerStyle: {
+                backgroundColor: colors.scrapFirstColor,
+                height: 20,
+              },
             };
           }}
         />
